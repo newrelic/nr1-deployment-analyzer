@@ -17,6 +17,25 @@ function openChartBuilder(query, account) {
     navigation.openOverlay(nerdlet)
 }
 
+function createMarker(timestamp, color){
+    return {
+        metadata: {
+            id: 'axis-marker-error',
+            color: '#000000',
+            viz: 'event',
+            axisMarkersType: 'alert',
+            name: 'Deployment'
+        },
+        data: [ 
+            {
+                id: timestamp,
+                x0: timestamp,
+                x1: timestamp,
+            }
+        ]
+    }
+}
+
 export default class DeploymentsContainer extends React.PureComponent {
     constructor(props){
         super(props)
@@ -43,8 +62,8 @@ export default class DeploymentsContainer extends React.PureComponent {
                         let sinceTime = deployment.timestamp - startBeforeMs
                         let untilTime = deployment.timestamp + startBeforeMs
                         let appClause = `WHERE applicationId = ${deployment.applicationId}`
-                        let timeClause = `SINCE ${sinceTime} UNTIL ${untilTime} COMPARE WITH 5 minutes ago`
-                        let timezone =  `WITH TIMEZONE '${Intl.DateTimeFormat().resolvedOptions().timeZone}'`
+                        let timeClause = `SINCE ${sinceTime} UNTIL ${untilTime}`
+                        // let timezone =  `WITH TIMEZONE '${Intl.DateTimeFormat().resolvedOptions().timeZone}'`
                         let throughputQuery = `SELECT count(*) as 'Requests' FROM Transaction, TransactionError`
                         let responseQuery = `SELECT average(duration) as 'Response' FROM Transaction`
                         let chartQuery = `SELECT * FROM Transaction, TransactionError ${appClause} SINCE ${sinceTime} UNTIL ${untilTime} LIMIT MAX`
@@ -98,33 +117,42 @@ export default class DeploymentsContainer extends React.PureComponent {
                             <Divider style={{marginTop:"7px", marginBottom:"7px"}} />
 
                             <div style={{display:"flex", justifyContent: "space-around"}}>
-                                    <NrqlQuery accountId={deployment["account.id"]} query={throughputQuery + ` ${appClause} TIMESERIES ${timeClause} ${timezone}`}>
+                                    <NrqlQuery accountId={deployment["account.id"]} query={throughputQuery + ` ${appClause} TIMESERIES ${timeClause}`}>
                                         {({data}) => {
-                                            data = data.map((nrqlData)=>{
-                                                nrqlData.metadata.timezoneOffsets = null
-                                                nrqlData.metadata.timezone_offsets = null
-                                                return nrqlData
-                                            })
+                                            if(data){
+                                                data = data.map((nrqlData)=>{
+                                                    nrqlData.metadata.timezone_offsets = null
+                                                    return nrqlData
+                                                })
+                                                let deploymentMarker = createMarker(deployment.timestamp, "#000000") 
+                                                data = data.concat(deploymentMarker)
+                                            }
                                             return <LineChart data={data} style={chartStyle}/>;
                                         }}
                                     </NrqlQuery>
-                                    <NrqlQuery accountId={deployment["account.id"]} query={responseQuery + ` ${appClause} TIMESERIES ${timeClause} ${timezone}`}>
+                                    <NrqlQuery accountId={deployment["account.id"]} query={responseQuery + ` ${appClause} TIMESERIES ${timeClause}`}>
                                         {({data}) => {
-                                            data = data.map((nrqlData)=>{
-                                                nrqlData.metadata.timezoneOffsets = null
-                                                nrqlData.metadata.timezone_offsets = null
-                                                return nrqlData
-                                            })
+                                            if(data){
+                                                data = data.map((nrqlData)=>{
+                                                    nrqlData.metadata.timezone_offsets = null
+                                                    return nrqlData
+                                                })
+                                                let deploymentMarker = createMarker(deployment.timestamp, "#000000") 
+                                                data = data.concat(deploymentMarker)
+                                            }
                                             return <LineChart data={data} style={chartStyle}/>;
                                         }}
                                     </NrqlQuery>
-                                    <NrqlQuery accountId={deployment["account.id"]} query={errorQuery + ` ${appClause} TIMESERIES ${timeClause} ${timezone}`}>
+                                    <NrqlQuery accountId={deployment["account.id"]} query={errorQuery + ` ${appClause} TIMESERIES ${timeClause}`}>
                                         {({data}) => {
-                                            data = data.map((nrqlData)=>{
-                                                nrqlData.metadata.timezoneOffsets = null
-                                                nrqlData.metadata.timezone_offsets = null
-                                                return nrqlData
-                                            })
+                                            if(data){
+                                                data = data.map((nrqlData)=>{
+                                                    nrqlData.metadata.timezone_offsets = null
+                                                    return nrqlData
+                                                })
+                                                let deploymentMarker = createMarker(deployment.timestamp, "#000000") 
+                                                data = data.concat(deploymentMarker)
+                                            }
                                             return <LineChart data={data} style={chartStyle}/>;
                                         }}
                                     </NrqlQuery>

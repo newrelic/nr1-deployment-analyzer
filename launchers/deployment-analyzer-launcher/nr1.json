@@ -4,5 +4,5 @@
     "description": "Analyze your application deployments",
     "displayName": "Deployment Analyzer",
     "icon": "interface_state_healthy",
-    "rootNerdletId": "35e0f5ec-7e97-4d04-ba95-1779c936878c.deployment-analyzer-nerdlet"
+    "rootNerdletId": "deployment-analyzer-nerdlet"
 }
