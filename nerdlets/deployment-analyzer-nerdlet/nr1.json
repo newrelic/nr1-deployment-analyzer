@@ -1,0 +1,6 @@
+{
+    "schemaType": "NERDLET",
+    "id": "deployment-analyzer-nerdlet",
+    "description": "Deployment Analyzer",
+    "displayName": "Deployment Analyzer"
+}

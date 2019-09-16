@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "deployment-analyzer",
+  "description": "Nerdpack deployment-analyzer",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "nr1 nerdpack:serve",
+    "test": "exit 0"
+  },
+  "nr1": {
+    "uuid": "35e0f5ec-7e97-4d04-ba95-1779c936878c"
+  },
+  "dependencies": {
+    "graphql": "^14.5.5",
+    "graphql-tag": "^2.10.1",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-select": "^3.0.4",
+    "react-virtualized": "^9.21.1",
+    "react-virtualized-auto-sizer": "^1.0.2",
+    "react-window": "^1.8.5",
+    "semantic-ui-react": "^0.88.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11",
+    "not dead"
+  ]
+}
