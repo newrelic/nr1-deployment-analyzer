@@ -4,7 +4,10 @@
 
 ## Usage
 
-View Application deployments across your environment from your APM deployment markers.
+View Application deployments across your environments from your APM deployment markers.
+
+![Screenshot](./screenshots/screenshot1.png)
+
 
 ## Open Source License
 
@@ -12,7 +15,7 @@ This project is distributed under the [Apache 2 license](LICENSE).
 
 ## What do you need to make this work?
 
-<!-- TO DO -->
+* [New Relic APM & Deployment Markers](https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/record-deployments-webhooks-or-api)
 
 ## Getting started
 
