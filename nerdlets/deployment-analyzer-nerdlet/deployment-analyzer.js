@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menu, Header, Grid, GridColumn, Dimmer, Loader } from 'semantic-ui-react';
-import { nerdGraphQuery, deploymentsQuery, checkType, sortObject } from './lib/utils'
+import { Menu, Grid, GridColumn, Dimmer, Loader } from 'semantic-ui-react';
+import { nerdGraphQuery, checkType, sortObject, apmEntityGuidsQuery, entityBatchQuery } from './lib/utils'
 import { AutoSizer } from 'nr1'; 
 import MenuBar from './components/menu-bar'
 import DeploymentFeed from './components/deployment-feed'
@@ -9,7 +9,10 @@ import DeploymentsContainer from './components/deployments-container';
 
 // https://docs.newrelic.com/docs/new-relic-programmable-platform-introduction
 
-
+const chunk = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+);
 export default class DeploymentAnalyzer extends React.Component {
 
     constructor(props){
@@ -19,6 +22,7 @@ export default class DeploymentAnalyzer extends React.Component {
             applications: [],
             sortByOptions: {}, // only string based options
             filterOptions: {}, // any string or numeric options
+            entities: [],
             groupBy: { label: "Application Name", value: "Application Name", type: "string" },
             groupSelected: "",
             groupSelectedMenu: "",
@@ -60,106 +64,129 @@ export default class DeploymentAnalyzer extends React.Component {
     }
 
     componentDidMount(){
+        this.setState({loading: true})
         this.fetchDeploymentData()
-    }
-
-    async fetchDeploymentData(){
-        await this.setState({loading: true})
-        let { deployments, sortByOptions, filterOptions, metrics } = await this.fetchDeployments()
-        this.groupDeployments(deployments, this.state.groupBy, this.state.filters)
-        this.setState({ deployments, sortByOptions, filterOptions })
-        await this.setState({loading: false, metrics})
-        // console.log(deployments, sortByOptions, filterOptions)
     }
 
     handleGroupSelect = (name, group) => {
         this.setState({ groupSelectedMenu: name, groupSelected: group })
     }
 
-    fetchDeployments(){
-        return new Promise(async (resolve)=>{
-            let currentDate = new Date().toLocaleDateString()
-            let deploymentsQueryResult = await nerdGraphQuery(deploymentsQuery)
-            let entities = ((((deploymentsQueryResult || {}).actor || {}).entitySearch || {}).results || {}).entities || []
-            let deployments = []
-            let sortByOptions = {}
-            let filterOptions = {}
-            let metrics = {
-                deploysToday: 0,
-                total: 0,
-                appsWithErrors: [],
-                appsAlerting: [],
-                appsWithApdexBelow1: []
-            }
-            entities.forEach((entity)=>{
-                entity.deployments.forEach((deployment)=>{
-                    // decorate deployments with entity meta
-                    Object.keys(entity).forEach((entityKey)=>{
-                        let entityKeyValue = entity[entityKey]
-                        let dataType = checkType(entityKeyValue)
-                        switch(dataType){
-                            case "string":
-                                deployment[entityKey] = entityKeyValue
-                                break
-                            case "number":
-                                deployment[entityKey] = entityKeyValue
-                                break
-                            case "object":
-                                Object.keys(entityKeyValue).forEach((key)=>{
-                                    deployment[`${entityKey}.${key}`] = entityKeyValue[key]
-                                })
-                                break
-                            case "array":
-                                if(entityKey == "tags"){
-                                    entityKeyValue.forEach((tag)=>{
-                                        deployment[`tag.${tag.key}`] = tag.values.length > 0 ? tag.values[0] : ""
-                                    })
-                                }
-                                break
-                            default:
-                                console.log("no idea",dataType, entityKey)
-                                //
-                        }
-                    })
-
-                    deployment["Account Name"] = deployment["account.name"]
-                    delete(deployment["account.name"])
-                    deployment["Application Name"] = deployment.name
-                    delete(deployment.name)
-
-                    let deploymentDate = new Date(deployment.timestamp).toLocaleDateString()
-                    if(deploymentDate == currentDate){
-                        metrics.deploysToday = metrics.deploysToday +1
-                    }
-                    deployment.Date = deploymentDate
-
-                    // delete typenames and add keys to sort options
-                    Object.keys(deployment).forEach((deploymentKey)=>{
-                        if(deploymentKey.includes("__typename")){
-                            delete(deployment[deploymentKey])
-                        }else{
-                            let dataType = checkType(deployment[deploymentKey])
-                            if(!sortByOptions[deploymentKey] && dataType == "string") sortByOptions[deploymentKey] = dataType
-                            if(!filterOptions[deploymentKey]) filterOptions[deploymentKey] = dataType
-                        }
-                    })
-
-                    if(deployment["apmSummary.apdexScore"] < 1 && !metrics.appsWithApdexBelow1.includes(deployment["Application Name"])) metrics.appsWithApdexBelow1.push(deployment["Application Name"])
-                    if(deployment["apmSummary.errorRate"] > 0 && !metrics.appsWithErrors.includes(deployment["Application Name"])) metrics.appsWithErrors.push(deployment["Application Name"])
-                    if(deployment.alertSeverity != "UNCONFIGURED" && deployment.alertSeverity != "NOT_CONFIGURED" && deployment.alertSeverity != "NOT_ALERTING" && !metrics.appsAlerting.includes(deployment["Application Name"])) metrics.appsAlerting.push(deployment["Application Name"])
-
-                    deployments.push(deployment)
-                })
+    async fetchDeploymentData(cursor){
+        let nerdGraphResult = await nerdGraphQuery(apmEntityGuidsQuery(cursor))
+        let entitySearchResults = (((nerdGraphResult || {}).actor || {}).entitySearch || {}).results || {}
+        let foundGuids = ((entitySearchResults || {}).entities || []).map((result)=>result.guid)
+        if(entitySearchResults){
+            let entityChunks = chunk(foundGuids, 25)
+            let entityPromises = entityChunks.map((chunk)=>{
+                return new Promise(async (resolve)=>{
+                    let guids = `"` + chunk.join(`","`) + `"`
+                    let nerdGraphResult = await nerdGraphQuery(entityBatchQuery(guids))
+                    resolve(nerdGraphResult)
+                });
             })
+              
+            await Promise.all(entityPromises).then((values)=>{
+                let { entities } = this.state
+                values.forEach(async (value)=>{
+                    let entitiesResult = ((value || {}).actor || {}).entities || []
+                    entities = [...entities, ...entitiesResult] 
+                    await this.setState({entities})
+                })
+            });
 
-            metrics.total = deployments.length
+            if(entitySearchResults.nextCursor){
+                console.log("collecting next entitySearch batch guid:", entitySearchResults.nextCursor)
+                this.fetchDeploymentData(entitySearchResults.nextCursor)
+            }else{
+                console.log("complete",this.state.entities.length)
+                let { deployments, sortByOptions, filterOptions, metrics } = this.sortDeployments(this.state.entities)
+                this.groupDeployments(deployments, this.state.groupBy, this.state.filters)
+                await this.setState({loading: false, deployments, sortByOptions, filterOptions, metrics})
+            }
+        }
+    }
 
-            // sort keys alphabetically
-            sortByOptions = sortObject(sortByOptions)
-            filterOptions = sortObject(filterOptions)
-            deployments = _.orderBy(deployments, ['timestamp'],['desc']) // sort newest deployments first
-            resolve({deployments, sortByOptions, filterOptions, metrics})
-        });
+    sortDeployments(entities){
+        let currentDate = new Date().toLocaleDateString()
+        let deployments = []
+        let sortByOptions = {}
+        let filterOptions = {}
+        let metrics = {
+            deploysToday: 0,
+            total: 0,
+            appsWithErrors: [],
+            appsAlerting: [],
+            appsWithApdexBelow1: []
+        }
+        entities.forEach((entity)=>{
+            entity.deployments.forEach((deployment)=>{
+                // decorate deployments with entity meta
+                Object.keys(entity).forEach((entityKey)=>{
+                    let entityKeyValue = entity[entityKey]
+                    let dataType = checkType(entityKeyValue)
+                    switch(dataType){
+                        case "string":
+                            deployment[entityKey] = entityKeyValue
+                            break
+                        case "number":
+                            deployment[entityKey] = entityKeyValue
+                            break
+                        case "object":
+                            Object.keys(entityKeyValue).forEach((key)=>{
+                                deployment[`${entityKey}.${key}`] = entityKeyValue[key]
+                            })
+                            break
+                        case "array":
+                            if(entityKey == "tags"){
+                                entityKeyValue.forEach((tag)=>{
+                                    deployment[`tag.${tag.key}`] = tag.values.length > 0 ? tag.values[0] : ""
+                                })
+                            }
+                            break
+                        default:
+                            console.log("no idea",dataType, entityKey)
+                            //
+                    }
+                })
+
+                deployment["Account Name"] = deployment["account.name"]
+                delete(deployment["account.name"])
+                deployment["Application Name"] = deployment.name
+                delete(deployment.name)
+
+                let deploymentDate = new Date(deployment.timestamp).toLocaleDateString()
+                if(deploymentDate == currentDate){
+                    metrics.deploysToday = metrics.deploysToday +1
+                }
+                deployment.Date = deploymentDate
+
+                // delete typenames and add keys to sort options
+                Object.keys(deployment).forEach((deploymentKey)=>{
+                    if(deploymentKey.includes("__typename")){
+                        delete(deployment[deploymentKey])
+                    }else{
+                        let dataType = checkType(deployment[deploymentKey])
+                        if(!sortByOptions[deploymentKey] && dataType == "string") sortByOptions[deploymentKey] = dataType
+                        if(!filterOptions[deploymentKey]) filterOptions[deploymentKey] = dataType
+                    }
+                })
+
+                if(deployment["apmSummary.apdexScore"] < 1 && !metrics.appsWithApdexBelow1.includes(deployment["Application Name"])) metrics.appsWithApdexBelow1.push(deployment["Application Name"])
+                if(deployment["apmSummary.errorRate"] > 0 && !metrics.appsWithErrors.includes(deployment["Application Name"])) metrics.appsWithErrors.push(deployment["Application Name"])
+                if(deployment.alertSeverity != "UNCONFIGURED" && deployment.alertSeverity != "NOT_CONFIGURED" && deployment.alertSeverity != "NOT_ALERTING" && !metrics.appsAlerting.includes(deployment["Application Name"])) metrics.appsAlerting.push(deployment["Application Name"])
+
+                deployments.push(deployment)
+            })
+        })
+
+        metrics.total = deployments.length
+
+        // sort keys alphabetically
+        sortByOptions = sortObject(sortByOptions)
+        filterOptions = sortObject(filterOptions)
+        deployments = _.orderBy(deployments, ['timestamp'],['desc']) // sort newest deployments first
+        return ({deployments, sortByOptions, filterOptions, metrics})
     }
 
     groupDeployments(deployments, groupBy, filters){

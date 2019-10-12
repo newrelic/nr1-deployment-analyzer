@@ -3,6 +3,5 @@
     "id": "deployment-analyzer-launcher",
     "description": "Analyze your application deployments",
     "displayName": "Deployment Analyzer",
-    "icon": "interface_state_healthy",
     "rootNerdletId": "deployment-analyzer-nerdlet"
 }
