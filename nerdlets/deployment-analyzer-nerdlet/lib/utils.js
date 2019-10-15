@@ -83,6 +83,73 @@ export const gqlNrqlQuery = (accountId, query, timeout) => {
     }`
 }
 
+export const apmEntityGuidsQuery = (cursor) => {
+  return `{
+    actor {
+      entitySearch(queryBuilder: {domain: APM, reporting: true}) {
+        count
+        query
+        results${cursor ? `(cursor: "${cursor}")` : ""} {
+          nextCursor
+          entities {
+            guid
+          }
+        }
+      }
+    }
+  }`
+}
+
+export const entityBatchQuery = (guids) => {
+  return `{
+    actor {
+      entities(guids: [${guids}]) {
+        ... on ApmApplicationEntity {
+          name
+          language
+          guid
+          alertSeverity
+          applicationId
+          deployments {
+            user
+            timestamp
+            revision
+            description
+            changelog
+          }
+          runningAgentVersions {
+            maxVersion
+            minVersion
+          }
+          settings {
+            apdexTarget
+          }
+          tags {
+            key
+            values
+          }
+          apmSummary {
+            apdexScore
+            errorRate
+            hostCount
+            instanceCount
+            nonWebResponseTimeAverage
+            nonWebThroughput
+            responseTimeAverage
+            throughput
+            webResponseTimeAverage
+            webThroughput
+          }
+          account {
+            name
+            id
+          }
+        }
+      }
+    }
+  }`  
+}
+
 export const nerdGraphQuery = async (query) => {
     return (await NerdGraphQuery.query({query: gql`${query}`})).data
 }
