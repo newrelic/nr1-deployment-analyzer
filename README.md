@@ -19,10 +19,18 @@ This project is distributed under the [Apache 2 license](LICENSE).
 
 ## Getting started
 
-Clone this repository and run the following scripts:
+First, ensure that you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [NPM](https://www.npmjs.com/get-npm) installed. If you're unsure whether you have one or both of them installed, run the following command(s) (If you have them installed these commands will return a version number, if not, the commands won't be recognized):
 
 ```bash
-git clone https://github.com/newrelic/nr1-deployment-analyzer.git
+git --version
+npm -v
+```
+
+Next, install the [NR1 CLI](https://one.newrelic.com/launcher/developer-center.launcher) by going to [this link](https://one.newrelic.com/launcher/developer-center.launcher) and following the instructions (5 minutes or less) to install and setup your New Relic development environment.
+
+Next, to clone this repository and run the code locally against your New Relic data, execute the following command:
+```bash
+nr1 nerdpack:clone -r https://github.com/newrelic/nr1-deployment-analyzer.git
 cd nr1-deployment-analyzer
 nr1 nerdpack:uuid -gf
 npm install
@@ -46,24 +54,24 @@ nr1 nerdpack:subscribe [-c [DEV|BETA|STABLE]] [--profile=your_profile_name]
 
 Visit [https://one.newrelic.com](https://one.newrelic.com), navigate to the Nerdpack, and :sparkles:
 
-## Support
+# Support
 
 New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR SUPPORT, although you can report issues and contribute to the project here on GitHub.
 
 _Please do not report issues with this software to New Relic Global Technical Support._
 
-### Community
+## Community
 
 New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorer's Hub. You can find this project's topic/threads here:
 
 [https://discuss.newrelic.com/c/build-on-new-relic/nr1-deployment-analyzer](https://discuss.newrelic.com/c/build-on-new-relic/nr1-deployment-analyzer)
 *(Note: URL subject to change before GA)*
 
-### Issues / Enhancement Requests
+## Issues / Enhancement Requests
 
 Issues and enhancement requests can be submitted in the [Issues tab of this repository](../../issues). Please search for and review the existing open issues before submitting a new issue.
 
-## Contributing
+# Contributing
 
 Contributions are welcome (and if you submit a Enhancement Request, expect to be invited to contribute it yourself :grin:). Please review our [Contributors Guide](CONTRIBUTING.md).
 
