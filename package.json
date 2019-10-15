@@ -10,7 +10,7 @@
     "eslint-fix": "eslint nerdlets/ --fix"
   },
   "nr1": {
-    "uuid": "35e0f5ec-7e97-4d04-ba95-1779c936878c"
+    "uuid": "aa4dc877-8314-4026-9579-a06b127679ee"
   },
   "dependencies": {
     "graphql": "^14.5.5",
