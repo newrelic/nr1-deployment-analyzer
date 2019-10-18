@@ -1,0 +1,143 @@
+{
+  "lastUpdated": "Wed Oct 02 2019 10:54:09 GMT-0400 (Eastern Daylight Time)",
+  "projectName": "nr1-deployment-analyzer",
+  "projectUrl": "https://github.com/newrelic/nr1-deployment-analyzer",
+  "includeDev": true,
+  "dependencies": {
+    "graphql-tag@2.10.1": {
+      "name": "graphql-tag",
+      "version": "2.10.1",
+      "range": "^2.10.1",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/apollostack/graphql-tag",
+      "versionedRepoUrl": "https://github.com/apollostack/graphql-tag/tree/v2.10.1",
+      "licenseFile": "node_modules/graphql-tag/LICENSE",
+      "licenseUrl": "https://github.com/apollostack/graphql-tag/blob/v2.10.1/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "graphql@14.5.5": {
+      "name": "graphql",
+      "version": "14.5.5",
+      "range": "^14.5.5",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/graphql/graphql-js",
+      "versionedRepoUrl": "https://github.com/graphql/graphql-js/tree/v14.5.5",
+      "licenseFile": "node_modules/graphql/LICENSE",
+      "licenseUrl": "https://github.com/graphql/graphql-js/blob/v14.5.5/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "lodash@4.17.15": {
+      "name": "lodash",
+      "version": "4.17.15",
+      "range": "^4.17.15",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/lodash/lodash",
+      "versionedRepoUrl": "https://github.com/lodash/lodash/tree/v4.17.15",
+      "licenseFile": "node_modules/lodash/LICENSE",
+      "licenseUrl": "https://github.com/lodash/lodash/blob/v4.17.15/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "John-David Dalton",
+      "email": "john.david.dalton@gmail.com"
+    },
+    "prop-types@15.7.2": {
+      "name": "prop-types",
+      "version": "15.7.2",
+      "range": "^15.6.2",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/facebook/prop-types",
+      "versionedRepoUrl": "https://github.com/facebook/prop-types/tree/v15.7.2",
+      "licenseFile": "node_modules/prop-types/LICENSE",
+      "licenseUrl": "https://github.com/facebook/prop-types/blob/v15.7.2/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "react-dom@16.9.0": {
+      "name": "react-dom",
+      "version": "16.9.0",
+      "range": "^16.6.3",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/facebook/react",
+      "versionedRepoUrl": "https://github.com/facebook/react/tree/v16.9.0",
+      "licenseFile": "node_modules/react-dom/LICENSE",
+      "licenseUrl": "https://github.com/facebook/react/blob/v16.9.0/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "react-select@3.0.4": {
+      "name": "react-select",
+      "version": "3.0.4",
+      "range": "^3.0.4",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/JedWatson/react-select",
+      "versionedRepoUrl": "https://github.com/JedWatson/react-select/tree/v3.0.4",
+      "licenseFile": "node_modules/react-select/README.md",
+      "licenseUrl": "https://github.com/JedWatson/react-select/blob/v3.0.4/README.md",
+      "licenseTextSource": "spdx",
+      "publisher": "Jed Watson"
+    },
+    "react-virtualized-auto-sizer@1.0.2": {
+      "name": "react-virtualized-auto-sizer",
+      "version": "1.0.2",
+      "range": "^1.0.2",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer",
+      "versionedRepoUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer/tree/v1.0.2",
+      "licenseFile": "node_modules/react-virtualized-auto-sizer/README.md",
+      "licenseUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer/blob/v1.0.2/README.md",
+      "licenseTextSource": "spdx",
+      "publisher": "Brian Vaughn",
+      "email": "brian.david.vaughn@gmail.com",
+      "url": "https://github.com/bvaughn/"
+    },
+    "react-virtualized@9.21.1": {
+      "name": "react-virtualized",
+      "version": "9.21.1",
+      "range": "^9.21.1",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/bvaughn/react-virtualized",
+      "versionedRepoUrl": "https://github.com/bvaughn/react-virtualized/tree/v9.21.1",
+      "licenseFile": "node_modules/react-virtualized/LICENSE",
+      "licenseUrl": "https://github.com/bvaughn/react-virtualized/blob/v9.21.1/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Brian Vaughn",
+      "email": "brian.david.vaughn@gmail.com"
+    },
+    "react-window@1.8.5": {
+      "name": "react-window",
+      "version": "1.8.5",
+      "range": "^1.8.5",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/bvaughn/react-window",
+      "versionedRepoUrl": "https://github.com/bvaughn/react-window/tree/v1.8.5",
+      "licenseFile": "node_modules/react-window/LICENSE.md",
+      "licenseUrl": "https://github.com/bvaughn/react-window/blob/v1.8.5/LICENSE.md",
+      "licenseTextSource": "file",
+      "publisher": "Brian Vaughn",
+      "email": "brian.david.vaughn@gmail.com",
+      "url": "https://github.com/bvaughn/"
+    },
+    "react@16.9.0": {
+      "name": "react",
+      "version": "16.9.0",
+      "range": "^16.6.3",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/facebook/react",
+      "versionedRepoUrl": "https://github.com/facebook/react/tree/v16.9.0",
+      "licenseFile": "node_modules/react/LICENSE",
+      "licenseUrl": "https://github.com/facebook/react/blob/v16.9.0/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "semantic-ui-react@0.88.1": {
+      "name": "semantic-ui-react",
+      "version": "0.88.1",
+      "range": "^0.88.1",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/Semantic-Org/Semantic-UI-React",
+      "versionedRepoUrl": "https://github.com/Semantic-Org/Semantic-UI-React/tree/v0.88.1",
+      "licenseFile": "node_modules/semantic-ui-react/LICENSE.md",
+      "licenseUrl": "https://github.com/Semantic-Org/Semantic-UI-React/blob/v0.88.1/LICENSE.md",
+      "licenseTextSource": "file",
+      "publisher": "Levi Thomason",
+      "email": "me@levithomason.com"
+    }
+  },
+  "devDependencies": {}
+}
