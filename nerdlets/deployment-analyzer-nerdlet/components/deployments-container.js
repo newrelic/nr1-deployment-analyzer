@@ -61,7 +61,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                         let startBeforeMs = 300000 // 5 minutes
                         let sinceTime = deployment.timestamp - startBeforeMs
                         let untilTime = deployment.timestamp + startBeforeMs
-                        let appClause = `WHERE appId = ${deployment.applicationId}`
+                        let appClause = `WHERE appId = ${deployment.applicationId} OR applicationId = ${deployment.applicationId}`
                         let timeClause = `SINCE ${sinceTime} UNTIL ${untilTime}`
                         // let timezone =  `WITH TIMEZONE '${Intl.DateTimeFormat().resolvedOptions().timeZone}'`
                         let throughputQuery = `SELECT count(*) as 'Requests' FROM Transaction, TransactionError`
