@@ -108,6 +108,7 @@ export default class DeploymentAnalyzer extends React.Component {
         let { launcherUrlState } = this.props
         let newTimeRange = launcherUrlState.timeRange
         if(!_.isEqual(this.state.timeRange, newTimeRange)){
+            this.setState({loading: true})
             let { startTime, endTime, duration } = this.determineTimeWindow(launcherUrlState.timeRange)
             await this.setState({startTime, endTime, duration, timeRange: launcherUrlState.timeRange})
             this.fetchDeploymentData(true, null, startTime, endTime)
