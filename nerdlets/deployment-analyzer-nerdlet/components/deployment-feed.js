@@ -81,7 +81,7 @@ export default class DeploymentFeed extends React.PureComponent {
                         </div>
                         <div>
                             <div style={{textAlign:"right"}}>
-                                <Popup basic hoverable trigger={<Button icon="tags" basic style={{width:"110px"}} content="Filter Tags"/>
+                                <Popup basic mouseEnterDelay={500} hoverable trigger={<Button icon="tags" basic style={{width:"110px"}} content="Filter Tags"/>
                                         } style={{padding:0, margin:0, width:10, textAlign:"left"}}> 
                                     {Object.keys(deployment).map((dKey, i)=>{
                                         if(!excludeKeys.includes(dKey) && deployment[dKey]){
@@ -112,16 +112,16 @@ export default class DeploymentFeed extends React.PureComponent {
     // https://github.com/bvaughn/react-virtualized/issues/1262
     render(){
         let { deployments, height, width } = this.props
-        return  <div style={{backgroundColor:"#FFF"}}>
-                    <List
-                        ref={this.bindListRef}
-                        width={width}
-                        height={height}
-                        rowCount={deployments.length}
-                        rowHeight={cardHeight}
-                        rowRenderer={this.rowRenderer}
-                        style={{borderRight:"1px solid #b9bdbdaf"}}
-                    />
-                </div>
+        return <div style={{backgroundColor:"#FFF"}}>
+            <List
+                ref={this.bindListRef}
+                width={width}
+                height={height}
+                rowCount={deployments.length}
+                rowHeight={cardHeight}
+                rowRenderer={this.rowRenderer}
+                style={{borderRight:"1px solid #b9bdbdaf"}}
+            />
+        </div> 
     }
 }

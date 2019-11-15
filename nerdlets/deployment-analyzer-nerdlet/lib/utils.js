@@ -100,7 +100,7 @@ export const apmEntityGuidsQuery = (cursor) => {
   }`
 }
 
-export const entityBatchQuery = (guids) => {
+export const entityBatchQuery = (guids, startTime, endTime) => {
   return `{
     actor {
       entities(guids: [${guids}]) {
@@ -110,7 +110,7 @@ export const entityBatchQuery = (guids) => {
           guid
           alertSeverity
           applicationId
-          deployments {
+          deployments${startTime && endTime ? `(timeWindow: {endTime: ${endTime}, startTime: ${startTime}})` : ""} {
             user
             timestamp
             revision

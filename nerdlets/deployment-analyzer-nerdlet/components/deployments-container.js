@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ChartGroup, LineChart, NrqlQuery, BillboardChart, navigation } from 'nr1'
-import { Icon, Label, Header, Divider, Popup, Button } from 'semantic-ui-react';
+import { Icon, Label, Header, Divider, Popup, Button, List } from 'semantic-ui-react';
 
 function openChartBuilder(query, account) {
     const nerdlet = {
@@ -49,10 +49,38 @@ export default class DeploymentsContainer extends React.PureComponent {
     }
 
     render(){
-        let { deployments, deploymentsToAnalyze } = this.props
-        console.log(deploymentsToAnalyze)
+        let { metrics, deploymentsToAnalyze, groupedDeployments } = this.props
 
-        return <div style={{height: this.props.height, overflowY:"auto", overflowX:"hidden", paddingTop:"15px", paddingRight:"25px", paddingLeft:"5px", backgroundColor:"#FFF"}}><ChartGroup>
+        if(metrics && metrics.total == 0){
+            return <>
+                        <br/>
+                        <Header as='h3'>No Deployments Found!</Header>
+                        <Header as='h5'>Suggestions</Header>
+                        <List bulleted>
+                            <List.Item>Check the time picker</List.Item>
+                            <List.Item>Ensure you are using APM Deployment Markers</List.Item>
+                            <List.Item>Confirm the Nerdpack has been deployed correctly
+                                <List.List>
+                                    <List.Item>Check the target account and profile</List.Item>
+                                    <List.Item>Check if the UUID has been updated for your targeted account</List.Item>
+                                </List.List>
+                            </List.Item>
+                        </List>
+                    </>
+        }else if(metrics.total > 0 && Object.keys(groupedDeployments) == 0){
+            return <div style={{paddingLeft:"10px"}}>
+                    <br/>
+                    <Header as='h4'>Select an option on the left to view the deployments.</Header>
+                    <Header as='h4'>Consider adjusting the grouping and filter options in the menu bar.</Header>
+                </div>
+        }else if(metrics.total > 0 && Object.keys(deploymentsToAnalyze) == 0){
+            return <div style={{paddingLeft:"10px"}}>
+                    <br/>
+                    <Header as='h4'>Click analyze on the corresponding deployments to the left for further detail.</Header>
+            </div>
+        }
+
+        return  <div style={{height: this.props.height, overflowY:"auto", overflowX:"hidden", paddingTop:"15px", paddingRight:"25px", paddingLeft:"5px", backgroundColor:"#FFF"}}><ChartGroup>
                     {Object.keys(deploymentsToAnalyze).map((key,i)=>{
                         let deployment = deploymentsToAnalyze[key]
                         let deployDate = new Date(deployment.timestamp).toLocaleString()

@@ -6,13 +6,21 @@ import MenuBar from './components/menu-bar'
 import DeploymentFeed from './components/deployment-feed'
 import FiltersContainer from './components/filters-container'
 import DeploymentsContainer from './components/deployments-container';
-
+import _ from 'lodash';
 // https://docs.newrelic.com/docs/new-relic-programmable-platform-introduction
 
 const chunk = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
     arr.slice(i * size, i * size + size)
 );
+
+const metricsDefault = {
+    deploysToday: 0,
+    total: 0,
+    appsWithErrors: [],
+    appsAlerting: [],
+    appsWithApdexBelow1: []
+}
 export default class DeploymentAnalyzer extends React.Component {
 
     constructor(props){
@@ -37,8 +45,14 @@ export default class DeploymentAnalyzer extends React.Component {
                 appsAlerting: [],
                 appsWithApdexBelow1: []
             },
+            timeRange: null,
             filters: {},
-            loading: false
+            loading: false,
+            startTime: null,
+            endTime: null,
+            duration: null,
+            fetchInProgress: false,
+            performNewFetch: false
         }
         this.setParentState = this.setParentState.bind(this);
         this.groupDeployments = this.groupDeployments.bind(this);
@@ -49,9 +63,14 @@ export default class DeploymentAnalyzer extends React.Component {
 
     async setParentState(data, trigger){
         await this.setState(data)
+        if(typeof data === 'object' && data !== null && data != {}){
+            trigger = Object.keys(data)[0]
+        }
         switch(trigger){
+            case "deploymentsToAnalyze":
             case "groupDeployments":
                 this.groupDeployments(this.state.deployments, this.state.groupBy, this.state.filters)
+                break;
             break
         }
     }
@@ -63,16 +82,45 @@ export default class DeploymentAnalyzer extends React.Component {
         this.groupDeployments(deployments, groupBy, filters)
     }
 
-    componentDidMount(){
+    determineTimeWindow(timeRange){
+        let { begin_time, end_time, duration } = timeRange
+        if(duration){
+            let endTime = new Date().getTime()
+            let startTime = endTime - duration
+            return { startTime, endTime, duration }
+        }else if(begin_time && end_time){
+            let startTime = begin_time
+            let endTime = end_time
+            return { startTime, endTime, duration }
+        }
+        return null
+    }
+
+    async componentDidMount(){
         this.setState({loading: true})
-        this.fetchDeploymentData()
+        let { launcherUrlState } = this.props
+        let { startTime, endTime, duration } = this.determineTimeWindow(launcherUrlState.timeRange)
+        await this.setState({startTime, endTime, duration, timeRange: launcherUrlState.timeRange})
+        this.fetchDeploymentData(true, null, startTime, endTime)
+    }
+
+    async componentDidUpdate(){
+        let { launcherUrlState } = this.props
+        let newTimeRange = launcherUrlState.timeRange
+        if(!_.isEqual(this.state.timeRange, newTimeRange)){
+            let { startTime, endTime, duration } = this.determineTimeWindow(launcherUrlState.timeRange)
+            await this.setState({startTime, endTime, duration, timeRange: launcherUrlState.timeRange})
+            this.fetchDeploymentData(true, null, startTime, endTime)
+        }
     }
 
     handleGroupSelect = (name, group) => {
         this.setState({ groupSelectedMenu: name, groupSelected: group })
     }
 
-    async fetchDeploymentData(cursor){
+    async fetchDeploymentData(startNew, cursor, startTime, endTime){
+        if(startNew) await this.setState({entities: [], deployments: [], deploymentsGrouped: {}, deploymentsToAnalyze: {}})
+        await this.setState({fetchInProgress: true})
         let nerdGraphResult = await nerdGraphQuery(apmEntityGuidsQuery(cursor))
         let entitySearchResults = (((nerdGraphResult || {}).actor || {}).entitySearch || {}).results || {}
         let foundGuids = ((entitySearchResults || {}).entities || []).map((result)=>result.guid)
@@ -81,7 +129,7 @@ export default class DeploymentAnalyzer extends React.Component {
             let entityPromises = entityChunks.map((chunk)=>{
                 return new Promise(async (resolve)=>{
                     let guids = `"` + chunk.join(`","`) + `"`
-                    let nerdGraphResult = await nerdGraphQuery(entityBatchQuery(guids))
+                    let nerdGraphResult = await nerdGraphQuery(entityBatchQuery(guids, startTime, endTime))
                     resolve(nerdGraphResult)
                 });
             })
@@ -95,9 +143,11 @@ export default class DeploymentAnalyzer extends React.Component {
                 })
             });
 
+            await this.setState({fetchInProgress: false})
+
             if(entitySearchResults.nextCursor){
                 console.log("collecting next entitySearch batch guid:", entitySearchResults.nextCursor)
-                this.fetchDeploymentData(entitySearchResults.nextCursor)
+                this.fetchDeploymentData(false, entitySearchResults.nextCursor, startTime, endTime)
             }else{
                 console.log("complete",this.state.entities.length)
                 let { deployments, sortByOptions, filterOptions, metrics } = this.sortDeployments(this.state.entities)
@@ -296,7 +346,8 @@ export default class DeploymentAnalyzer extends React.Component {
                                     return <DeploymentsContainer 
                                         height={height}
                                         deploymentsToAnalyze={deploymentsToAnalyze}
-                                        deployments={Object.keys(deploymentsToAnalyze).length}
+                                        metrics={metrics}
+                                        groupedDeployments={deploymentsGrouped[groupSelected] || {}}
                                         setParentState={this.setParentState}
                                     />
                                 }
