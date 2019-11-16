@@ -2,7 +2,7 @@
   "private": true,
   "name": "deployment-analyzer",
   "description": "Nerdpack deployment-analyzer",
-  "version": "0.1.6",
+  "version": "0.2.1",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",
@@ -10,7 +10,6 @@
     "eslint-fix": "eslint nerdlets/ --fix"
   },
   "nr1": {
-    "uuidDT": "de66a743-4a84-4940-b0d2-2ebca7b36f58",
     "uuid": "35e0f5ec-7e97-4d04-ba95-1779c936878c"
   },
   "dependencies": {
@@ -30,5 +29,9 @@
     "last 2 versions",
     "not ie < 11",
     "not dead"
-  ]
+  ],
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.5",
+    "@semantic-release/git": "^7.0.18"
+  }
 }
