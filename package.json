@@ -2,7 +2,7 @@
   "private": true,
   "name": "deployment-analyzer",
   "description": "Nerdpack deployment-analyzer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",

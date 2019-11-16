@@ -63,7 +63,7 @@ export default class DeploymentAnalyzer extends React.Component {
 
     async setParentState(data, trigger){
         await this.setState(data)
-        if(typeof data === 'object' && data !== null && data != {}){
+        if(!trigger && typeof data === 'object' && data !== null && data != {}){
             trigger = Object.keys(data)[0]
         }
         switch(trigger){
