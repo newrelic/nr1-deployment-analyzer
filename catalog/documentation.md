@@ -12,11 +12,11 @@ Features like cross-account support, deployment summary data and connections to 
 
 Advanced grouping and filtering features enable you to examine correlations and drill into the data in new and actionable ways.
 
-![Screenshot](./catalog/screenshots/nr1-deployment-analyzer-1.png)
+![Screenshot](https://github.com/newrelic/nr1-deployment-analyzer/catalog/screenshots/nr1-deployment-analyzer-1.png)
 
 ## Open Source License
 
-This project is distributed under the [Apache 2 license](./LICENSE).
+This project is distributed under the [Apache 2 license](https://github.com/newrelic/nr1-deployment-analyzer/blob/master/LICENSE).
 
 ## Dependencies
 
@@ -71,10 +71,10 @@ Please do not report issues with Deployment Analyzer to New Relic Global Technic
 
 ## Issues / Enhancement Requests
 
-Issues and enhancement requests can be submitted in the [Issues tab of this repository](../../issues). Please search for and review the existing open issues before submitting a new issue.
+Issues and enhancement requests can be submitted in the [Issues tab of this repository](https://github.com/newrelic/nr1-deployment-analyzer/issues). Please search for and review the existing open issues before submitting a new issue.
 
 ## Contributing
 
-Contributions are welcome (and if you submit a Enhancement Request, expect to be invited to contribute it yourself :grin:). Please review our [Contributors Guide](./CONTRIBUTING.md).
+Contributions are welcome (and if you submit a Enhancement Request, expect to be invited to contribute it yourself :grin:). Please review our [Contributors Guide](https://github.com/newrelic/nr1-deployment-analyzer/blob/master/CONTRIBUTING.md).
 
 Keep in mind that when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. If you'd like to execute our corporate CLA, or if you have any questions, please drop us an email at opensource+nr1-deployment-analyzer@newrelic.com.
