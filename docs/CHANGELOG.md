@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.2.0...v0.3.0) (2020-03-09)
+
+
+### Features
+
+* **catalog:** add catalog metadata files ([#10](https://github.com/newrelic/nr1-deployment-analyzer/issues/10)) ([8d72800](https://github.com/newrelic/nr1-deployment-analyzer/commit/8d728009be35a9c12f19a964ba0910b0491d5e3c)), closes [newrelic/nr1-deployment-analyzer#9](https://github.com/newrelic/nr1-deployment-analyzer/issues/9)
+
 # [0.2.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.1.1...v0.2.0) (2020-02-21)
 
 
