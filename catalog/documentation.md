@@ -1,9 +1,3 @@
-[![New Relic One Catalog Project header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/New_Relic_One_Catalog_Project.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#nr1-catalog)
-
-# nr1-deployment-analyzer
-
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-deployment-analyzer?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic/nr1-deployment-analyzer/badge.svg)](https://snyk.io/test/github/newrelic/nr1-deployment-analyzer)
-
 ## Usage
 
 Deployment Analyzer provides a unified dashboard experience for viewing APM deployment marker data.
@@ -11,8 +5,6 @@ Deployment Analyzer provides a unified dashboard experience for viewing APM depl
 Features like cross-account support, deployment summary data and connections to related events provide a valuable high-level overview.
 
 Advanced grouping and filtering features enable you to examine correlations and drill into the data in new and actionable ways.
-
-![Screenshot](https://github.com/newrelic/nr1-deployment-analyzer/catalog/screenshots/nr1-deployment-analyzer-1.png)
 
 ## Open Source License
 
