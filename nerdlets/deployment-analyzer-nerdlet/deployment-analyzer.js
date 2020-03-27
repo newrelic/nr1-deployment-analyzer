@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Menu, Grid, GridColumn, Dimmer, Loader } from 'semantic-ui-react';
 import {
   nerdGraphQuery,
@@ -20,21 +21,15 @@ const chunk = (arr, size) =>
     arr.slice(i * size, i * size + size)
   );
 
-const metricsDefault = {
-  deploysToday: 0,
-  total: 0,
-  appsWithErrors: [],
-  appsAlerting: [],
-  appsWithApdexBelow1: [],
-};
 export default class DeploymentAnalyzer extends React.Component {
+  static propTypes = {
+    launcherUrlState: PropTypes.object,
+    height: PropTypes.number,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      accounts: [],
-      applications: [],
-      sortByOptions: {}, // only string based options
-      filterOptions: {}, // any string or numeric options
       entities: [],
       groupBy: {
         label: 'Application Name',
@@ -45,7 +40,6 @@ export default class DeploymentAnalyzer extends React.Component {
       groupSelectedMenu: '',
       deployments: [],
       deploymentsGrouped: {},
-      deploymentsFiltered: [],
       deploymentsToAnalyze: {},
       metrics: {
         deploysToday: 0,
@@ -57,11 +51,6 @@ export default class DeploymentAnalyzer extends React.Component {
       timeRange: null,
       filters: {},
       loading: false,
-      startTime: null,
-      endTime: null,
-      duration: null,
-      fetchInProgress: false,
-      performNewFetch: false,
     };
     this.setParentState = this.setParentState.bind(this);
     this.groupDeployments = this.groupDeployments.bind(this);
@@ -69,9 +58,37 @@ export default class DeploymentAnalyzer extends React.Component {
     this.fetchDeploymentData = this.fetchDeploymentData.bind(this);
   }
 
+  async componentDidMount() {
+    this.setState({ loading: true });
+    const { launcherUrlState } = this.props;
+    const { startTime, endTime } = this.determineTimeWindow(
+      launcherUrlState.timeRange
+    );
+    this.setState({
+      timeRange: launcherUrlState.timeRange,
+    });
+    this.fetchDeploymentData(true, null, startTime, endTime);
+  }
+
+  async componentDidUpdate() {
+    const { launcherUrlState } = this.props;
+    const newTimeRange = launcherUrlState.timeRange;
+    if (!_.isEqual(this.state.timeRange, newTimeRange)) {
+      const { startTime, endTime } = this.determineTimeWindow(
+        launcherUrlState.timeRange
+      );
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        loading: true,
+        timeRange: launcherUrlState.timeRange,
+      });
+      this.fetchDeploymentData(true, null, startTime, endTime);
+    }
+  }
+
   async setParentState(data, trigger) {
-    await this.setState(data);
-    if (!trigger && typeof data === 'object' && data !== null && data != {}) {
+    this.setState(data);
+    if (!trigger && typeof data === 'object' && data !== null && data !== {}) {
       trigger = Object.keys(data)[0];
     }
     switch (trigger) {
@@ -82,7 +99,6 @@ export default class DeploymentAnalyzer extends React.Component {
           this.state.groupBy,
           this.state.filters
         );
-        break;
         break;
     }
   }
@@ -108,52 +124,20 @@ export default class DeploymentAnalyzer extends React.Component {
     return null;
   }
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const { launcherUrlState } = this.props;
-    const { startTime, endTime, duration } = this.determineTimeWindow(
-      launcherUrlState.timeRange
-    );
-    await this.setState({
-      startTime,
-      endTime,
-      duration,
-      timeRange: launcherUrlState.timeRange,
-    });
-    this.fetchDeploymentData(true, null, startTime, endTime);
-  }
-
-  async componentDidUpdate() {
-    const { launcherUrlState } = this.props;
-    const newTimeRange = launcherUrlState.timeRange;
-    if (!_.isEqual(this.state.timeRange, newTimeRange)) {
-      this.setState({ loading: true });
-      const { startTime, endTime, duration } = this.determineTimeWindow(
-        launcherUrlState.timeRange
-      );
-      await this.setState({
-        startTime,
-        endTime,
-        duration,
-        timeRange: launcherUrlState.timeRange,
-      });
-      this.fetchDeploymentData(true, null, startTime, endTime);
-    }
-  }
-
   handleGroupSelect = (name, group) => {
     this.setState({ groupSelectedMenu: name, groupSelected: group });
   };
 
   async fetchDeploymentData(startNew, cursor, startTime, endTime) {
-    if (startNew)
-      await this.setState({
+    if (startNew) {
+      this.setState({
         entities: [],
         deployments: [],
         deploymentsGrouped: {},
         deploymentsToAnalyze: {},
       });
-    await this.setState({ fetchInProgress: true });
+    }
+
     const nerdGraphResult = await nerdGraphQuery(apmEntityGuidsQuery(cursor));
     const entitySearchResults =
       (((nerdGraphResult || {}).actor || {}).entitySearch || {}).results || {};
@@ -177,13 +161,12 @@ export default class DeploymentAnalyzer extends React.Component {
         values.forEach(async (value) => {
           const entitiesResult = ((value || {}).actor || {}).entities || [];
           entities = [...entities, ...entitiesResult];
-          await this.setState({ entities });
+          this.setState({ entities });
         });
       });
 
-      await this.setState({ fetchInProgress: false });
-
       if (entitySearchResults.nextCursor) {
+        // eslint-disable-next-line no-console
         console.log(
           'collecting next entitySearch batch guid:',
           entitySearchResults.nextCursor
@@ -195,23 +178,20 @@ export default class DeploymentAnalyzer extends React.Component {
           endTime
         );
       } else {
+        // eslint-disable-next-line no-console
         console.log('complete', this.state.entities.length);
-        const {
-          deployments,
-          sortByOptions,
-          filterOptions,
-          metrics,
-        } = this.sortDeployments(this.state.entities);
+        const { deployments, sortByOptions, metrics } = this.sortDeployments(
+          this.state.entities
+        );
         this.groupDeployments(
           deployments,
           this.state.groupBy,
           this.state.filters
         );
-        await this.setState({
+        this.setState({
           loading: false,
           deployments,
           sortByOptions,
-          filterOptions,
           metrics,
         });
       }
@@ -249,7 +229,7 @@ export default class DeploymentAnalyzer extends React.Component {
               });
               break;
             case 'array':
-              if (entityKey == 'tags') {
+              if (entityKey === 'tags') {
                 entityKeyValue.forEach((tag) => {
                   deployment[`tag.${tag.key}`] =
                     tag.values.length > 0 ? tag.values[0] : '';
@@ -257,8 +237,7 @@ export default class DeploymentAnalyzer extends React.Component {
               }
               break;
             default:
-              console.log('no idea', dataType, entityKey);
-            //
+            // console.log('no idea', dataType, entityKey);
           }
         });
 
@@ -270,7 +249,7 @@ export default class DeploymentAnalyzer extends React.Component {
         const deploymentDate = new Date(
           deployment.timestamp
         ).toLocaleDateString();
-        if (deploymentDate == currentDate) {
+        if (deploymentDate === currentDate) {
           metrics.deploysToday = metrics.deploysToday + 1;
         }
         deployment.Date = deploymentDate;
@@ -281,7 +260,7 @@ export default class DeploymentAnalyzer extends React.Component {
             delete deployment[deploymentKey];
           } else {
             const dataType = checkType(deployment[deploymentKey]);
-            if (!sortByOptions[deploymentKey] && dataType == 'string')
+            if (!sortByOptions[deploymentKey] && dataType === 'string')
               sortByOptions[deploymentKey] = dataType;
             if (!filterOptions[deploymentKey])
               filterOptions[deploymentKey] = dataType;
@@ -299,9 +278,9 @@ export default class DeploymentAnalyzer extends React.Component {
         )
           metrics.appsWithErrors.push(deployment['Application Name']);
         if (
-          deployment.alertSeverity != 'UNCONFIGURED' &&
-          deployment.alertSeverity != 'NOT_CONFIGURED' &&
-          deployment.alertSeverity != 'NOT_ALERTING' &&
+          deployment.alertSeverity !== 'UNCONFIGURED' &&
+          deployment.alertSeverity !== 'NOT_CONFIGURED' &&
+          deployment.alertSeverity !== 'NOT_ALERTING' &&
           !metrics.appsAlerting.includes(deployment['Application Name'])
         )
           metrics.appsAlerting.push(deployment['Application Name']);
@@ -336,9 +315,9 @@ export default class DeploymentAnalyzer extends React.Component {
           tempDeployments = tempDeployments.filter(
             (deployment) =>
               deployment.alertSeverity &&
-              deployment.alertSeverity != 'UNCONFIGURED' &&
-              deployment.alertSeverity != 'NOT_CONFIGURED' &&
-              deployment.alertSeverity != 'NOT_ALERTING'
+              deployment.alertSeverity !== 'UNCONFIGURED' &&
+              deployment.alertSeverity !== 'NOT_CONFIGURED' &&
+              deployment.alertSeverity !== 'NOT_ALERTING'
           );
           break;
         default:
@@ -346,7 +325,7 @@ export default class DeploymentAnalyzer extends React.Component {
           if (isNaN(split[1])) {
             tempDeployments = tempDeployments.filter(
               (deployment) =>
-                deployment[split[0]] && deployment[split[0]] == split[1]
+                deployment[split[0]] && deployment[split[0]] === split[1]
             );
           } else {
             tempDeployments = tempDeployments.filter(
@@ -486,7 +465,7 @@ export default class DeploymentAnalyzer extends React.Component {
             </Grid.Column>
             <Grid.Column width={9} style={{ padding: '0px', height: '100%' }}>
               <AutoSizer>
-                {({ height, width }) => {
+                {({ height }) => {
                   return (
                     <DeploymentsContainer
                       height={height}

@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Icon } from 'semantic-ui-react';
 
-function Filter({ attribute, value, removeFilter }) {
+function Filter({ value, removeFilter }) {
   return (
     <div className="filter">
       <span onClick={removeFilter}>
@@ -10,8 +12,18 @@ function Filter({ attribute, value, removeFilter }) {
     </div>
   );
 }
+Filter.propTypes = {
+  value: PropTypes.string,
+  removeFilter: PropTypes.func,
+};
 
 export default class FiltersContainer extends React.PureComponent {
+  static propTypes = {
+    filters: PropTypes.object,
+    setParentState: PropTypes.func,
+    count: PropTypes.number,
+  };
+
   constructor(props) {
     super(props);
     this.removeFilter = this.removeFilter.bind(this);

@@ -1,49 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Select from 'react-select';
 import { Statistic } from 'semantic-ui-react';
-import _ from 'lodash';
 
 const initialState = { isLoading: false, results: [], value: '', type: '' };
 
 export default class MenuBar extends React.PureComponent {
-  state = initialState;
+  static propTypes = {
+    sortByOptions: PropTypes.object,
+    groupBy: PropTypes.func,
+    setParentState: PropTypes.func,
+    metrics: PropTypes.object,
+    updateFilter: PropTypes.func,
+  };
 
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleResultSelect = this.handleResultSelect.bind(this);
-    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
-  handleResultSelect = (e, { result }) => {
-    this.setState({
-      attributeSelected: result.title,
-      type: result.type,
-      value: result.title,
-      operator: '',
-    });
-  };
-
-  handleSearchChange = (e, { value }) => {
-    this.setState({
-      isLoading: true,
-      value,
-      attributeSelected: '',
-      operator: '',
-    });
-
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.setState(initialState);
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-      const isMatch = (result) => re.test(result.title);
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(this.props.keySet, isMatch),
-      });
-    }, 300);
-  };
+  state = initialState;
 
   render() {
     const { sortByOptions, groupBy, setParentState, metrics } = this.props;

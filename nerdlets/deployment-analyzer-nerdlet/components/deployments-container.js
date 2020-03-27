@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   ChartGroup,
   LineChart,
@@ -30,7 +32,7 @@ function openChartBuilder(query, account) {
   navigation.openOverlay(nerdlet);
 }
 
-function createMarker(timestamp, color) {
+function createMarker(timestamp) {
   return {
     metadata: {
       id: 'axis-marker-error',
@@ -50,6 +52,14 @@ function createMarker(timestamp, color) {
 }
 
 export default class DeploymentsContainer extends React.PureComponent {
+  static propTypes = {
+    setParentState: PropTypes.func,
+    metrics: PropTypes.object,
+    deploymentsToAnalyze: PropTypes.object,
+    groupedDeployments: PropTypes.object,
+    height: PropTypes.number,
+  };
+
   constructor(props) {
     super(props);
     this.removeDeployment = this.removeDeployment.bind(this);
@@ -64,7 +74,7 @@ export default class DeploymentsContainer extends React.PureComponent {
   render() {
     const { metrics, deploymentsToAnalyze, groupedDeployments } = this.props;
 
-    if (metrics && metrics.total == 0) {
+    if (metrics && metrics.total === 0) {
       return (
         <>
           <br />
@@ -85,7 +95,7 @@ export default class DeploymentsContainer extends React.PureComponent {
           </List>
         </>
       );
-    } else if (metrics.total > 0 && Object.keys(groupedDeployments) == 0) {
+    } else if (metrics.total > 0 && Object.keys(groupedDeployments) === 0) {
       return (
         <div style={{ paddingLeft: '10px' }}>
           <br />
@@ -97,7 +107,7 @@ export default class DeploymentsContainer extends React.PureComponent {
           </Header>
         </div>
       );
-    } else if (metrics.total > 0 && Object.keys(deploymentsToAnalyze) == 0) {
+    } else if (metrics.total > 0 && Object.keys(deploymentsToAnalyze) === 0) {
       return (
         <div style={{ paddingLeft: '10px' }}>
           <br />

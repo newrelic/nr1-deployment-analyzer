@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Header, Button, Popup, Icon } from 'semantic-ui-react';
 import { navigation } from 'nr1';
 import { List } from 'react-virtualized';
@@ -6,6 +8,15 @@ import { List } from 'react-virtualized';
 const cardHeight = 110;
 
 export default class DeploymentFeed extends React.PureComponent {
+  static propTypes = {
+    filters: PropTypes.object,
+    setParentState: PropTypes.func,
+    deploymentsToAnalyze: PropTypes.object,
+    deployments: PropTypes.object,
+    height: PropTypes.number,
+    width: PropTypes.number,
+  };
+
   constructor(props) {
     super(props);
     this.rowRenderer = this.rowRenderer.bind(this);
@@ -37,7 +48,9 @@ export default class DeploymentFeed extends React.PureComponent {
   rowRenderer({
     key, // Unique key within array of rows
     index, // Index of row within collection
+    // eslint-disable-next-line no-unused-vars
     isScrolling, // The List is currently being scrolled
+    // eslint-disable-next-line no-unused-vars
     isVisible, // This row is visible within the List (eg it is not an overscanned row)
     style, // Style object to be applied to row (to position it)
   }) {
@@ -83,7 +96,7 @@ export default class DeploymentFeed extends React.PureComponent {
                   <span>
                     <Icon
                       color={statusColor}
-                      name={statusColor != 'green' ? 'warning' : 'check'}
+                      name={statusColor !== 'green' ? 'warning' : 'check'}
                       circular
                     />{' '}
                     {deployDate}{' '}
@@ -143,6 +156,7 @@ export default class DeploymentFeed extends React.PureComponent {
                       />
                     );
                   }
+                  return null;
                 })}
               </Popup>
               <br />
