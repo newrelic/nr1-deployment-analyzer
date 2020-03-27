@@ -9,7 +9,7 @@ const initialState = { isLoading: false, results: [], value: '', type: '' };
 export default class MenuBar extends React.PureComponent {
   static propTypes = {
     sortByOptions: PropTypes.object,
-    groupBy: PropTypes.func,
+    groupBy: PropTypes.object,
     setParentState: PropTypes.func,
     metrics: PropTypes.object,
     updateFilter: PropTypes.func,
@@ -24,6 +24,10 @@ export default class MenuBar extends React.PureComponent {
 
   render() {
     const { sortByOptions, groupBy, setParentState, metrics } = this.props;
+    if (!sortByOptions) {
+      return null;
+    }
+
     const quickFilterOptions = [
       { key: 1, label: 'Error Rate > 0', value: 'Error Rate > 0' },
       { key: 2, label: 'Apdex Score < 1', value: 'Apdex Score < 1' },
@@ -45,9 +49,9 @@ export default class MenuBar extends React.PureComponent {
             <label>Group By</label>
             <Select
               options={groupByOptions}
-              onChange={(groupBy) =>
-                setParentState({ groupBy }, 'groupDeployments')
-              }
+              onChange={(groupBy) => {
+                setParentState({ groupBy }, 'groupDeployments');
+              }}
               value={groupBy}
               classNamePrefix="react-select"
             />

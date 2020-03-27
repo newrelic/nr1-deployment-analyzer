@@ -56,7 +56,10 @@ export default class DeploymentsContainer extends React.PureComponent {
     setParentState: PropTypes.func,
     metrics: PropTypes.object,
     deploymentsToAnalyze: PropTypes.object,
-    groupedDeployments: PropTypes.object,
+    groupedDeployments: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object,
+    ]),
     height: PropTypes.number,
   };
 

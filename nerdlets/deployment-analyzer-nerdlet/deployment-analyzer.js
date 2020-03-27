@@ -87,20 +87,26 @@ export default class DeploymentAnalyzer extends React.Component {
   }
 
   async setParentState(data, trigger) {
-    this.setState(data);
-    if (!trigger && typeof data === 'object' && data !== null && data !== {}) {
-      trigger = Object.keys(data)[0];
-    }
-    switch (trigger) {
-      case 'deploymentsToAnalyze':
-      case 'groupDeployments':
-        this.groupDeployments(
-          this.state.deployments,
-          this.state.groupBy,
-          this.state.filters
-        );
-        break;
-    }
+    this.setState(data, () => {
+      if (
+        !trigger &&
+        typeof data === 'object' &&
+        data !== null &&
+        data !== {}
+      ) {
+        trigger = Object.keys(data)[0];
+      }
+      switch (trigger) {
+        case 'deploymentsToAnalyze':
+        case 'groupDeployments':
+          this.groupDeployments(
+            this.state.deployments,
+            this.state.groupBy,
+            this.state.filters
+          );
+          break;
+      }
+    });
   }
 
   updateFilter = (data) => {

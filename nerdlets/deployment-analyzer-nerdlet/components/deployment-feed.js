@@ -12,7 +12,7 @@ export default class DeploymentFeed extends React.PureComponent {
     filters: PropTypes.object,
     setParentState: PropTypes.func,
     deploymentsToAnalyze: PropTypes.object,
-    deployments: PropTypes.object,
+    deployments: PropTypes.array,
     height: PropTypes.number,
     width: PropTypes.number,
   };
