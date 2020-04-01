@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Header, Button, Popup, Icon } from 'semantic-ui-react';
-import { navigation } from 'nr1';
+import { navigation, AutoSizer } from 'nr1';
 import { List } from 'react-virtualized';
 
 const cardHeight = 110;
@@ -13,8 +13,6 @@ export default class DeploymentFeed extends React.PureComponent {
     setParentState: PropTypes.func,
     deploymentsToAnalyze: PropTypes.object,
     deployments: PropTypes.array,
-    height: PropTypes.number,
-    width: PropTypes.number,
   };
 
   constructor(props) {
@@ -183,19 +181,25 @@ export default class DeploymentFeed extends React.PureComponent {
   // list doesn't reupdate if row length is the same without the bindListRef
   // https://github.com/bvaughn/react-virtualized/issues/1262
   render() {
-    const { deployments, height, width } = this.props;
+    const { deployments } = this.props;
     return (
-      <div style={{ backgroundColor: '#FFF' }}>
-        <List
-          ref={this.bindListRef}
-          width={width}
-          height={height}
-          rowCount={deployments.length}
-          rowHeight={cardHeight}
-          rowRenderer={this.rowRenderer}
-          style={{ borderRight: '1px solid #b9bdbdaf' }}
-        />
-      </div>
+      <AutoSizer>
+        {({ height, width }) => {
+          return (
+            <div style={{ backgroundColor: '#FFF' }}>
+              <List
+                ref={this.bindListRef}
+                width={width}
+                height={height}
+                rowCount={deployments.length}
+                rowHeight={cardHeight}
+                rowRenderer={this.rowRenderer}
+                style={{ borderRight: '1px solid #b9bdbdaf' }}
+              />
+            </div>
+          );
+        }}
+      </AutoSizer>
     );
   }
 }

@@ -8,7 +8,6 @@ import {
   apmEntityGuidsQuery,
   entityBatchQuery,
 } from './lib/utils';
-import { AutoSizer } from 'nr1';
 import MenuBar from './components/menu-bar';
 import DeploymentFeed from './components/deployment-feed';
 import FiltersContainer from './components/filters-container';
@@ -21,7 +20,7 @@ const chunk = (arr, size) =>
     arr.slice(i * size, i * size + size)
   );
 
-export default class DeploymentAnalyzer extends React.Component {
+export default class DeploymentAnalyzer extends React.PureComponent {
   static propTypes = {
     launcherUrlState: PropTypes.object,
     height: PropTypes.number,
@@ -60,30 +59,27 @@ export default class DeploymentAnalyzer extends React.Component {
 
   async componentDidMount() {
     this.setState({ loading: true });
+    this.loadData();
+  }
+
+  async componentDidUpdate() {
+    const newTimeRange = this.props.launcherUrlState.timeRange;
+
+    if (!_.isEqual(this.state.timeRange, newTimeRange)) {
+      this.loadData();
+    }
+  }
+
+  loadData() {
     const { launcherUrlState } = this.props;
     const { startTime, endTime } = this.determineTimeWindow(
       launcherUrlState.timeRange
     );
     this.setState({
+      loading: true,
       timeRange: launcherUrlState.timeRange,
     });
     this.fetchDeploymentData(true, null, startTime, endTime);
-  }
-
-  async componentDidUpdate() {
-    const { launcherUrlState } = this.props;
-    const newTimeRange = launcherUrlState.timeRange;
-    if (!_.isEqual(this.state.timeRange, newTimeRange)) {
-      const { startTime, endTime } = this.determineTimeWindow(
-        launcherUrlState.timeRange
-      );
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        loading: true,
-        timeRange: launcherUrlState.timeRange,
-      });
-      this.fetchDeploymentData(true, null, startTime, endTime);
-    }
   }
 
   async setParentState(data, trigger) {
@@ -153,13 +149,8 @@ export default class DeploymentAnalyzer extends React.Component {
     if (entitySearchResults) {
       const entityChunks = chunk(foundGuids, 25);
       const entityPromises = entityChunks.map((chunk) => {
-        return new Promise(async (resolve) => {
-          const guids = `"${chunk.join(`","`)}"`;
-          const nerdGraphResult = await nerdGraphQuery(
-            entityBatchQuery(guids, startTime, endTime)
-          );
-          resolve(nerdGraphResult);
-        });
+        const guids = `"${chunk.join(`","`)}"`;
+        return nerdGraphQuery(entityBatchQuery(guids, startTime, endTime));
       });
 
       await Promise.all(entityPromises).then((values) => {
@@ -172,11 +163,10 @@ export default class DeploymentAnalyzer extends React.Component {
       });
 
       if (entitySearchResults.nextCursor) {
-        // eslint-disable-next-line no-console
-        console.log(
-          'collecting next entitySearch batch guid:',
-          entitySearchResults.nextCursor
-        );
+        // console.debug(
+        //   'collecting next entitySearch batch guid:',
+        //   entitySearchResults.nextCursor
+        // );
         this.fetchDeploymentData(
           false,
           entitySearchResults.nextCursor,
@@ -184,8 +174,7 @@ export default class DeploymentAnalyzer extends React.Component {
           endTime
         );
       } else {
-        // eslint-disable-next-line no-console
-        console.log('complete', this.state.entities.length);
+        // console.debug('complete', this.state.entities.length);
         const { deployments, sortByOptions, metrics } = this.sortDeployments(
           this.state.entities
         );
@@ -310,6 +299,7 @@ export default class DeploymentAnalyzer extends React.Component {
     let filterError = false;
 
     Object.keys(filters).forEach((filterValue) => {
+      const split = filterValue.split(':');
       switch (filterValue) {
         case 'Error Rate > 0':
           filterError = true;
@@ -327,7 +317,6 @@ export default class DeploymentAnalyzer extends React.Component {
           );
           break;
         default:
-          const split = filterValue.split(':');
           if (isNaN(split[1])) {
             tempDeployments = tempDeployments.filter(
               (deployment) =>
@@ -451,40 +440,23 @@ export default class DeploymentAnalyzer extends React.Component {
               width={4}
               style={{ maxHeight: this.props.height - 75, padding: '0px' }}
             >
-              <AutoSizer>
-                {({ height, width }) => {
-                  return deploymentsGrouped[groupSelected] ? (
-                    <DeploymentFeed
-                      setParentState={this.setParentState}
-                      filters={filters}
-                      height={height}
-                      width={width}
-                      groupSelected={groupSelected}
-                      deployments={deploymentsGrouped[groupSelected]}
-                      deploymentsToAnalyze={deploymentsToAnalyze}
-                    />
-                  ) : (
-                    ''
-                  );
-                }}
-              </AutoSizer>
+              {deploymentsGrouped[groupSelected] ? (
+                <DeploymentFeed
+                  setParentState={this.setParentState}
+                  filters={filters}
+                  groupSelected={groupSelected}
+                  deployments={deploymentsGrouped[groupSelected]}
+                  deploymentsToAnalyze={deploymentsToAnalyze}
+                />
+              ) : null}
             </Grid.Column>
             <Grid.Column width={9} style={{ padding: '0px', height: '100%' }}>
-              <AutoSizer>
-                {({ height }) => {
-                  return (
-                    <DeploymentsContainer
-                      height={height}
-                      deploymentsToAnalyze={deploymentsToAnalyze}
-                      metrics={metrics}
-                      groupedDeployments={
-                        deploymentsGrouped[groupSelected] || {}
-                      }
-                      setParentState={this.setParentState}
-                    />
-                  );
-                }}
-              </AutoSizer>
+              <DeploymentsContainer
+                deploymentsToAnalyze={deploymentsToAnalyze}
+                metrics={metrics}
+                groupedDeployments={deploymentsGrouped[groupSelected] || {}}
+                setParentState={this.setParentState}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
+  AutoSizer,
   ChartGroup,
   LineChart,
   NrqlQuery,
@@ -60,7 +61,6 @@ export default class DeploymentsContainer extends React.PureComponent {
       PropTypes.array,
       PropTypes.object,
     ]),
-    height: PropTypes.number,
   };
 
   constructor(props) {
@@ -123,190 +123,206 @@ export default class DeploymentsContainer extends React.PureComponent {
     }
 
     return (
-      <div
-        style={{
-          height: this.props.height,
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          paddingTop: '15px',
-          paddingRight: '25px',
-          paddingLeft: '5px',
-          backgroundColor: '#FFF',
-        }}
-      >
-        <ChartGroup>
-          {Object.keys(deploymentsToAnalyze).map((key, i) => {
-            const deployment = deploymentsToAnalyze[key];
-            const deployDate = new Date(deployment.timestamp).toLocaleString();
-            const appName = deployment['Application Name'];
-            const accName = deployment['Account Name'];
-            const startBeforeMs = 300000; // 5 minutes
-            const sinceTime = deployment.timestamp - startBeforeMs;
-            const untilTime = deployment.timestamp + startBeforeMs;
-            const appClause = `WHERE appId = ${deployment.applicationId} OR applicationId = ${deployment.applicationId}`;
-            const timeClause = `SINCE ${sinceTime} UNTIL ${untilTime}`;
-            // let timezone =  `WITH TIMEZONE '${Intl.DateTimeFormat().resolvedOptions().timeZone}'`
-            const throughputQuery = `SELECT count(*) as 'Requests' FROM Transaction, TransactionError`;
-            const responseQuery = `SELECT average(duration) as 'Response' FROM Transaction`;
-            const chartQuery = `SELECT * FROM Transaction, TransactionError ${appClause} SINCE ${sinceTime} UNTIL ${untilTime} LIMIT MAX`;
-            const errorQuery = `SELECT count(*) as 'Errors' FROM Transaction, TransactionError WHERE error IS TRUE OR (httpResponseCode NOT LIKE '2%%' AND httpResponseCode NOT LIKE '3%%') OR error.message IS NOT NULL`;
-            const topChartStyle = {
-              width: '125px',
-              height: '50px',
-              display: 'inline-block',
-              paddingRight: '15px',
-            };
-            const chartStyle = {
-              width: '300px',
-              height: '150px',
-              display: 'inline-block',
-              paddingRight: '15px',
-            };
-            return (
-              <div key={i}>
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <div>
-                    <BillboardChart
-                      accountId={deployment['account.id']}
-                      query={`${throughputQuery} ${appClause} ${timeClause}`}
-                      style={topChartStyle}
-                    />
-                    <BillboardChart
-                      accountId={deployment['account.id']}
-                      query={`${responseQuery} ${appClause} ${timeClause}`}
-                      style={topChartStyle}
-                    />
-                    <BillboardChart
-                      accountId={deployment['account.id']}
-                      query={`${errorQuery} ${appClause} ${timeClause}`}
-                      style={topChartStyle}
-                    />
-                  </div>
-
-                  <div>
-                    <Popup
-                      basic
-                      content="View Events from 5 minutes before till 5 minutes after your deployment"
-                      trigger={
-                        <Button
-                          className="filter-button"
-                          icon="chart line"
-                          onClick={() =>
-                            openChartBuilder(
-                              chartQuery,
-                              deployment['account.id']
-                            )
-                          }
-                          content="View Events"
-                        />
-                      }
-                    />
-                  </div>
-
-                  <div className="flex-push" />
-
-                  <div>
-                    <Header as="h4" style={{ textAlign: 'right' }}>
-                      <Label
-                        image
-                        basic
-                        onClick={() => this.removeDeployment(key)}
-                        size="large"
-                        style={{ border: '0px', paddingRight: '0px' }}
+      <AutoSizer>
+        {({ height }) => {
+          return (
+            <div
+              style={{
+                height: height,
+                overflowY: 'auto',
+                overflowX: 'hidden',
+                paddingTop: '15px',
+                paddingRight: '25px',
+                paddingLeft: '5px',
+                backgroundColor: '#FFF',
+              }}
+            >
+              <ChartGroup>
+                {Object.keys(deploymentsToAnalyze).map((key, i) => {
+                  const deployment = deploymentsToAnalyze[key];
+                  const deployDate = new Date(
+                    deployment.timestamp
+                  ).toLocaleString();
+                  const appName = deployment['Application Name'];
+                  const accName = deployment['Account Name'];
+                  const startBeforeMs = 300000; // 5 minutes
+                  const sinceTime = deployment.timestamp - startBeforeMs;
+                  const untilTime = deployment.timestamp + startBeforeMs;
+                  const appClause = `WHERE appId = ${deployment.applicationId} OR applicationId = ${deployment.applicationId}`;
+                  const timeClause = `SINCE ${sinceTime} UNTIL ${untilTime}`;
+                  // let timezone =  `WITH TIMEZONE '${Intl.DateTimeFormat().resolvedOptions().timeZone}'`
+                  const throughputQuery = `SELECT count(*) as 'Requests' FROM Transaction, TransactionError`;
+                  const responseQuery = `SELECT average(duration) as 'Response' FROM Transaction`;
+                  const chartQuery = `SELECT * FROM Transaction, TransactionError ${appClause} SINCE ${sinceTime} UNTIL ${untilTime} LIMIT MAX`;
+                  const errorQuery = `SELECT count(*) as 'Errors' FROM Transaction, TransactionError WHERE error IS TRUE OR (httpResponseCode NOT LIKE '2%%' AND httpResponseCode NOT LIKE '3%%') OR error.message IS NOT NULL`;
+                  const topChartStyle = {
+                    width: '125px',
+                    height: '50px',
+                    display: 'inline-block',
+                    paddingRight: '15px',
+                  };
+                  const chartStyle = {
+                    width: '300px',
+                    height: '150px',
+                    display: 'inline-block',
+                    paddingRight: '15px',
+                  };
+                  return (
+                    <div key={i}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                        }}
                       >
-                        {deployDate}
-                        <Icon name="delete" />
-                      </Label>
-                      {/* {deployDate} <Icon link name='close' size={"mini"} onClick={()=>this.removeDeployment(key)} /> */}
-                      <Header.Subheader>
-                        <span
-                          style={{ cursor: 'pointer' }}
-                          onClick={() =>
-                            navigation.openStackedEntity(deployment.guid)
-                          }
+                        <div>
+                          <BillboardChart
+                            accountId={deployment['account.id']}
+                            query={`${throughputQuery} ${appClause} ${timeClause}`}
+                            style={topChartStyle}
+                          />
+                          <BillboardChart
+                            accountId={deployment['account.id']}
+                            query={`${responseQuery} ${appClause} ${timeClause}`}
+                            style={topChartStyle}
+                          />
+                          <BillboardChart
+                            accountId={deployment['account.id']}
+                            query={`${errorQuery} ${appClause} ${timeClause}`}
+                            style={topChartStyle}
+                          />
+                        </div>
+
+                        <div>
+                          <Popup
+                            basic
+                            content="View Events from 5 minutes before till 5 minutes after your deployment"
+                            trigger={
+                              <Button
+                                className="filter-button"
+                                icon="chart line"
+                                onClick={() =>
+                                  openChartBuilder(
+                                    chartQuery,
+                                    deployment['account.id']
+                                  )
+                                }
+                                content="View Events"
+                              />
+                            }
+                          />
+                        </div>
+
+                        <div className="flex-push" />
+
+                        <div>
+                          <Header as="h4" style={{ textAlign: 'right' }}>
+                            <Label
+                              image
+                              basic
+                              onClick={() => this.removeDeployment(key)}
+                              size="large"
+                              style={{ border: '0px', paddingRight: '0px' }}
+                            >
+                              {deployDate}
+                              <Icon name="delete" />
+                            </Label>
+                            {/* {deployDate} <Icon link name='close' size={"mini"} onClick={()=>this.removeDeployment(key)} /> */}
+                            <Header.Subheader>
+                              <span
+                                style={{ cursor: 'pointer' }}
+                                onClick={() =>
+                                  navigation.openStackedEntity(deployment.guid)
+                                }
+                              >
+                                {appName}
+                              </span>{' '}
+                              on {accName}
+                            </Header.Subheader>
+                            <Header.Subheader>
+                              {deployment.description} : {deployment.revision}
+                            </Header.Subheader>
+                          </Header>
+                        </div>
+                      </div>
+
+                      <Divider
+                        style={{ marginTop: '7px', marginBottom: '7px' }}
+                      />
+
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-around',
+                        }}
+                      >
+                        <NrqlQuery
+                          accountId={deployment['account.id']}
+                          query={`${throughputQuery} ${appClause} TIMESERIES ${timeClause}`}
                         >
-                          {appName}
-                        </span>{' '}
-                        on {accName}
-                      </Header.Subheader>
-                      <Header.Subheader>
-                        {deployment.description} : {deployment.revision}
-                      </Header.Subheader>
-                    </Header>
-                  </div>
-                </div>
-
-                <Divider style={{ marginTop: '7px', marginBottom: '7px' }} />
-
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-around' }}
-                >
-                  <NrqlQuery
-                    accountId={deployment['account.id']}
-                    query={`${throughputQuery} ${appClause} TIMESERIES ${timeClause}`}
-                  >
-                    {({ data }) => {
-                      if (data) {
-                        data = data.map((nrqlData) => {
-                          nrqlData.metadata.timezone_offsets = null;
-                          return nrqlData;
-                        });
-                        const deploymentMarker = createMarker(
-                          deployment.timestamp,
-                          '#000000'
-                        );
-                        data = data.concat(deploymentMarker);
-                      }
-                      return <LineChart data={data} style={chartStyle} />;
-                    }}
-                  </NrqlQuery>
-                  <NrqlQuery
-                    accountId={deployment['account.id']}
-                    query={`${responseQuery} ${appClause} TIMESERIES ${timeClause}`}
-                  >
-                    {({ data }) => {
-                      if (data) {
-                        data = data.map((nrqlData) => {
-                          nrqlData.metadata.timezone_offsets = null;
-                          return nrqlData;
-                        });
-                        const deploymentMarker = createMarker(
-                          deployment.timestamp,
-                          '#000000'
-                        );
-                        data = data.concat(deploymentMarker);
-                      }
-                      return <LineChart data={data} style={chartStyle} />;
-                    }}
-                  </NrqlQuery>
-                  <NrqlQuery
-                    accountId={deployment['account.id']}
-                    query={`${errorQuery} ${appClause} TIMESERIES ${timeClause}`}
-                  >
-                    {({ data }) => {
-                      if (data) {
-                        data = data.map((nrqlData) => {
-                          nrqlData.metadata.timezone_offsets = null;
-                          return nrqlData;
-                        });
-                        const deploymentMarker = createMarker(
-                          deployment.timestamp,
-                          '#000000'
-                        );
-                        data = data.concat(deploymentMarker);
-                      }
-                      return <LineChart data={data} style={chartStyle} />;
-                    }}
-                  </NrqlQuery>
-                </div>
-                <Divider />
-              </div>
-            );
-          })}
-        </ChartGroup>
-      </div>
+                          {({ data }) => {
+                            if (data) {
+                              data = data.map((nrqlData) => {
+                                nrqlData.metadata.timezone_offsets = null;
+                                return nrqlData;
+                              });
+                              const deploymentMarker = createMarker(
+                                deployment.timestamp,
+                                '#000000'
+                              );
+                              data = data.concat(deploymentMarker);
+                            }
+                            return <LineChart data={data} style={chartStyle} />;
+                          }}
+                        </NrqlQuery>
+                        <NrqlQuery
+                          accountId={deployment['account.id']}
+                          query={`${responseQuery} ${appClause} TIMESERIES ${timeClause}`}
+                        >
+                          {({ data }) => {
+                            if (data) {
+                              data = data.map((nrqlData) => {
+                                nrqlData.metadata.timezone_offsets = null;
+                                return nrqlData;
+                              });
+                              const deploymentMarker = createMarker(
+                                deployment.timestamp,
+                                '#000000'
+                              );
+                              data = data.concat(deploymentMarker);
+                            }
+                            return <LineChart data={data} style={chartStyle} />;
+                          }}
+                        </NrqlQuery>
+                        <NrqlQuery
+                          accountId={deployment['account.id']}
+                          query={`${errorQuery} ${appClause} TIMESERIES ${timeClause}`}
+                        >
+                          {({ data }) => {
+                            if (data) {
+                              data = data.map((nrqlData) => {
+                                nrqlData.metadata.timezone_offsets = null;
+                                return nrqlData;
+                              });
+                              const deploymentMarker = createMarker(
+                                deployment.timestamp,
+                                '#000000'
+                              );
+                              data = data.concat(deploymentMarker);
+                            }
+                            return <LineChart data={data} style={chartStyle} />;
+                          }}
+                        </NrqlQuery>
+                      </div>
+                      <Divider />
+                    </div>
+                  );
+                })}
+              </ChartGroup>
+            </div>
+          );
+        }}
+      </AutoSizer>
     );
   }
 }
