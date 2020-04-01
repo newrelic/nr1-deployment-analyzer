@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Mon Mar 09 2020 12:49:30 GMT+0000 (Coordinated Universal Time)",
+  "lastUpdated": "Wed Apr 01 2020 18:36:12 GMT+0000 (Coordinated Universal Time)",
   "projectName": "nr1-deployment-analyzer",
   "projectUrl": "https://github.com/newrelic/nr1-deployment-analyzer",
   "includeDev": true,
@@ -140,6 +140,18 @@
     }
   },
   "devDependencies": {
+    "@newrelic/eslint-plugin-newrelic@0.3.0": {
+      "name": "@newrelic/eslint-plugin-newrelic",
+      "version": "0.3.0",
+      "range": "^0.3.0",
+      "licenses": "Apache-2.0",
+      "repoUrl": "https://github.com/NewRelic/eslint-plugin-newrelic",
+      "versionedRepoUrl": "https://github.com/NewRelic/eslint-plugin-newrelic/tree/v0.3.0",
+      "licenseFile": "node_modules/@newrelic/eslint-plugin-newrelic/LICENSE",
+      "licenseUrl": "https://github.com/NewRelic/eslint-plugin-newrelic/blob/v0.3.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "New Relic"
+    },
     "@semantic-release/changelog@3.0.5": {
       "name": "@semantic-release/changelog",
       "version": "3.0.5",
@@ -165,6 +177,31 @@
       "licenseTextSource": "file",
       "publisher": "Pierre Vanduynslager",
       "url": "https://github.com/pvdlg"
+    },
+    "eslint@6.8.0": {
+      "name": "eslint",
+      "version": "6.8.0",
+      "range": "^6.8.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/eslint/eslint",
+      "versionedRepoUrl": "https://github.com/eslint/eslint/tree/v6.8.0",
+      "licenseFile": "node_modules/eslint/LICENSE",
+      "licenseUrl": "https://github.com/eslint/eslint/blob/v6.8.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Nicholas C. Zakas",
+      "email": "nicholas+npm@nczconsulting.com"
+    },
+    "prettier@2.0.2": {
+      "name": "prettier",
+      "version": "2.0.2",
+      "range": "^2.0.2",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/prettier/prettier",
+      "versionedRepoUrl": "https://github.com/prettier/prettier/tree/v2.0.2",
+      "licenseFile": "node_modules/prettier/LICENSE",
+      "licenseUrl": "https://github.com/prettier/prettier/blob/v2.0.2/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "James Long"
     }
   }
 }
