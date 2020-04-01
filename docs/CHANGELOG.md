@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.0...v0.3.1) (2020-04-01)
+
+
+### Bug Fixes
+
+* eslint setup/fixes ([#12](https://github.com/newrelic/nr1-deployment-analyzer/issues/12)), refactor context usage ([53b5d15](https://github.com/newrelic/nr1-deployment-analyzer/commit/53b5d152a517ae22d4329884aa38b69be8ddaf39)), closes [#7](https://github.com/newrelic/nr1-deployment-analyzer/issues/7)
+
 # [0.3.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.2.0...v0.3.0) (2020-03-09)
 
 
