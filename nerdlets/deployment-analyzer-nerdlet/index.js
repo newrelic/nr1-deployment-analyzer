@@ -1,28 +1,22 @@
 import React from 'react';
-import { NerdletStateContext, PlatformStateContext, AutoSizer } from 'nr1';
-import DeploymentAnalyzer from './deployment-analyzer'
-export default class Root extends React.Component {
+import { PlatformStateContext, AutoSizer } from 'nr1';
+import DeploymentAnalyzer from './deployment-analyzer';
 
-    render() {
-        return (
-            <PlatformStateContext.Consumer>
-            {(launcherUrlState) => (
-              <NerdletStateContext.Consumer>
-                {(nerdletUrlState) => (
-                  <AutoSizer>
-                    {({width, height}) => (
-                      <DeploymentAnalyzer
-                        launcherUrlState={launcherUrlState}
-                        nerdletUrlState={nerdletUrlState}
-                        width={width}
-                        height={height}
-                      />
-                    )}
-                  </AutoSizer>
-                )}
-              </NerdletStateContext.Consumer>
+export default class Root extends React.PureComponent {
+  render() {
+    return (
+      <PlatformStateContext.Consumer>
+        {(launcherUrlState) => (
+          <AutoSizer>
+            {({ height }) => (
+              <DeploymentAnalyzer
+                launcherUrlState={launcherUrlState}
+                height={height}
+              />
             )}
-          </PlatformStateContext.Consumer>
-        )
-    }
+          </AutoSizer>
+        )}
+      </PlatformStateContext.Consumer>
+    );
+  }
 }

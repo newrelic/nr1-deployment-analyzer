@@ -8,7 +8,7 @@ export const accountsQuery = `{
         name
       }
     }
-  }`
+  }`;
 
 export const deploymentsQuery = `{
     actor {
@@ -62,17 +62,19 @@ export const deploymentsQuery = `{
         }
       }
     }
-  }`
+  }`;
 
 export const nrdbQuery = async (accountId, query, timeout) => {
-    let q = gqlNrqlQuery(accountId, query, timeout)
-    let result = await NerdGraphQuery.query({query: q})
-    let nrqlResult = (((((result || {}).data || {}).actor || {}).account || {}).nrql || {}).results || []
-    return nrqlResult
-}
+  const q = gqlNrqlQuery(accountId, query, timeout);
+  const result = await NerdGraphQuery.query({ query: q });
+  const nrqlResult =
+    (((((result || {}).data || {}).actor || {}).account || {}).nrql || {})
+      .results || [];
+  return nrqlResult;
+};
 
 export const gqlNrqlQuery = (accountId, query, timeout) => {
-    return gql`{
+  return gql`{
         actor {
             account(id: ${accountId}) {
                 nrql(query: "${query}", timeout: ${timeout || 30000}) {
@@ -80,8 +82,8 @@ export const gqlNrqlQuery = (accountId, query, timeout) => {
                 }
             }
         }
-    }`
-}
+    }`;
+};
 
 export const apmEntityGuidsQuery = (cursor) => {
   return `{
@@ -89,7 +91,7 @@ export const apmEntityGuidsQuery = (cursor) => {
       entitySearch(queryBuilder: {domain: APM, reporting: true}) {
         count
         query
-        results${cursor ? `(cursor: "${cursor}")` : ""} {
+        results${cursor ? `(cursor: "${cursor}")` : ''} {
           nextCursor
           entities {
             guid
@@ -97,8 +99,8 @@ export const apmEntityGuidsQuery = (cursor) => {
         }
       }
     }
-  }`
-}
+  }`;
+};
 
 export const entityBatchQuery = (guids, startTime, endTime) => {
   return `{
@@ -110,7 +112,11 @@ export const entityBatchQuery = (guids, startTime, endTime) => {
           guid
           alertSeverity
           applicationId
-          deployments${startTime && endTime ? `(timeWindow: {endTime: ${endTime}, startTime: ${startTime}})` : ""} {
+          deployments${
+            startTime && endTime
+              ? `(timeWindow: {endTime: ${endTime}, startTime: ${startTime}})`
+              : ''
+          } {
             user
             timestamp
             revision
@@ -147,40 +153,48 @@ export const entityBatchQuery = (guids, startTime, endTime) => {
         }
       }
     }
-  }`  
-}
+  }`;
+};
 
 export const nerdGraphQuery = async (query) => {
-    return (await NerdGraphQuery.query({query: gql`${query}`})).data
-}
+  return (
+    await NerdGraphQuery.query({
+      query: gql`
+        ${query}
+      `,
+    })
+  ).data;
+};
 
 export const isString = (value) => {
-    return typeof value === 'string' || value instanceof String;
-}
+  return typeof value === 'string' || value instanceof String;
+};
 
-export const isNumber = (value) =>{
-    return typeof value === 'number' && isFinite(value);
-}
+export const isNumber = (value) => {
+  return typeof value === 'number' && isFinite(value);
+};
 
 export const isArray = (value) => {
-    return value && typeof value === 'object' && value.constructor === Array;
-}
-    
+  return value && typeof value === 'object' && value.constructor === Array;
+};
+
 export const isObject = (value) => {
-    return value && typeof value === 'object' && value.constructor === Object;
-}
+  return value && typeof value === 'object' && value.constructor === Object;
+};
 
 export const checkType = (value) => {
-    if(isString(value)) return "string"
-    if(isNumber(value)) return "number"
-    if(isArray(value))  return "array"
-    if(isObject(value)) return "object"
-    return null
-}
+  if (isString(value)) return 'string';
+  if (isNumber(value)) return 'number';
+  if (isArray(value)) return 'array';
+  if (isObject(value)) return 'object';
+  return null;
+};
 
 export const sortObject = (obj) => {
-    return Object.keys(obj)
-      .sort().reduce((a, v) => {
+  return Object.keys(obj)
+    .sort()
+    .reduce((a, v) => {
       a[v] = obj[v];
-      return a; }, {});
-}
+      return a;
+    }, {});
+};
