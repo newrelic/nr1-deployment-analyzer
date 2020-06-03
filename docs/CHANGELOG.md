@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.1...v0.3.2) (2020-06-03)
+
+
+### Bug Fixes
+
+* Switch CI to GitHub Actions ([#19](https://github.com/newrelic/nr1-deployment-analyzer/issues/19)) ([f82fba0](https://github.com/newrelic/nr1-deployment-analyzer/commit/f82fba0e494625532ee3256626a7ca102fef8bd8))
+
 ## [0.3.1](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.0...v0.3.1) (2020-04-01)
 
 
