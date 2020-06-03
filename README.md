@@ -2,7 +2,7 @@
 
 # nr1-deployment-analyzer
 
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-deployment-analyzer?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic/nr1-deployment-analyzer/badge.svg)](https://snyk.io/test/github/newrelic/nr1-deployment-analyzer)
+![CI](https://github.com/newrelic/nr1-deployment-analyzer/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-deployment-analyzer?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic/nr1-deployment-analyzer/badge.svg)](https://snyk.io/test/github/newrelic/nr1-deployment-analyzer)
 
 ## Usage
 
