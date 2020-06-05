@@ -202,7 +202,6 @@ jobs:
             })
             console.log("Result:", result)
 
-      # This can use GITHUB_TOKEN since we're disabling branch protection prior to this step
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.OPENSOURCE_BOT_TOKEN }}
