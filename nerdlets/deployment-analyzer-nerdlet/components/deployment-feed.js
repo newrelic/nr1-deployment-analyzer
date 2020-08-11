@@ -15,35 +15,28 @@ export default class DeploymentFeed extends React.PureComponent {
     deployments: PropTypes.array,
   };
 
-  constructor(props) {
-    super(props);
-    this.rowRenderer = this.rowRenderer.bind(this);
-    this.updateFilter = this.updateFilter.bind(this);
-    this.addDeployment = this.addDeployment.bind(this);
-  }
-
   componentDidUpdate() {
     if (this.list) {
       this.list.forceUpdateGrid();
     }
   }
 
-  updateFilter(key, val) {
+  updateFilter = (key, val) => {
     const { filters, setParentState } = this.props;
     filters[`${key}:${val}`] = `${key}:${val}`;
     setParentState({ filters }, 'groupDeployments');
-  }
+  };
 
-  addDeployment(deployment) {
+  addDeployment = (deployment) => {
     const { deploymentsToAnalyze, setParentState } = this.props;
     const appName = deployment['Application Name'];
     const accName = deployment['Account Name'];
     const key = `${deployment.timestamp}_${appName}_${accName}`;
     deploymentsToAnalyze[key] = deployment;
     setParentState({ deploymentsToAnalyze });
-  }
+  };
 
-  rowRenderer({
+  rowRenderer = ({
     key, // Unique key within array of rows
     index, // Index of row within collection
     // eslint-disable-next-line no-unused-vars
@@ -51,7 +44,7 @@ export default class DeploymentFeed extends React.PureComponent {
     // eslint-disable-next-line no-unused-vars
     isVisible, // This row is visible within the List (eg it is not an overscanned row)
     style, // Style object to be applied to row (to position it)
-  }) {
+  }) => {
     const deployment = this.props.deployments[index];
     const deployDate = new Date(deployment.timestamp).toLocaleString();
     const appName = deployment['Application Name'];
@@ -111,7 +104,9 @@ export default class DeploymentFeed extends React.PureComponent {
               </Header.Subheader>
               <Header.Subheader>{accName}</Header.Subheader>
               <Header.Subheader>{deployment.description}</Header.Subheader>
-              <Header.Subheader>{deployment.revision}</Header.Subheader>
+              <Header.Subheader className="revision">
+                {deployment.revision}
+              </Header.Subheader>
             </Header>
           </div>
           <div>
@@ -172,7 +167,7 @@ export default class DeploymentFeed extends React.PureComponent {
         </div>
       </div>
     );
-  }
+  };
 
   bindListRef = (ref) => {
     this.list = ref;
