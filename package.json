@@ -17,7 +17,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-select": "^3.0.4",
-    "react-virtualized": "^9.21.1",
+    "react-virtualized": "9.22.2",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "semantic-ui-react": "^0.88.1"
