@@ -105,7 +105,8 @@ export default class DeploymentFeed extends React.PureComponent {
               <Header.Subheader>{accName}</Header.Subheader>
               <Header.Subheader>{deployment.description}</Header.Subheader>
               <Header.Subheader className="revision">
-                {deployment.revision}
+                {/* {deployment.revision} */}
+                69c41ad95b0a89d8697d06df0deca5ff15676ac9
               </Header.Subheader>
             </Header>
           </div>
