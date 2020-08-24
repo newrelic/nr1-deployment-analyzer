@@ -411,12 +411,5 @@
 }
 
 .revision {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 260px;
-
-  &:hover {
-    text-overflow: clip;
-    word-break: break-all;
-  }
+  word-break: break-all;
 }
