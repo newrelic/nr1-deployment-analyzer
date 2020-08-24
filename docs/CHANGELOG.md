@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.3...v0.3.4) (2020-08-24)
+
+
+### Bug Fixes
+
+* id reverted ([797c68a](https://github.com/newrelic/nr1-deployment-analyzer/commit/797c68af30a36a630e71045472d85460e8435153))
+* long revisions fixed ([96e6507](https://github.com/newrelic/nr1-deployment-analyzer/commit/96e650723ac225beb80798bdec5c1a4580dbd0ac))
+* long revisions fixed ([3d67de0](https://github.com/newrelic/nr1-deployment-analyzer/commit/3d67de0bf5d145730949948efce193e5128c256c))
+
 ## [0.3.3](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.2...v0.3.3) (2020-08-12)
 
 
