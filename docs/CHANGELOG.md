@@ -1,3 +1,10 @@
+## [0.3.5](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.4...v0.3.5) (2020-09-03)
+
+
+### Bug Fixes
+
+* update default branch to main ([f1dccd2](https://github.com/newrelic/nr1-deployment-analyzer/commit/f1dccd24225192d473156c412b8e4dc3cc587d3a))
+
 ## [0.3.4](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.3...v0.3.4) (2020-08-24)
 
 
