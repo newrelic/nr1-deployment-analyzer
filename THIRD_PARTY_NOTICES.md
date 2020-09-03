@@ -18,12 +18,10 @@ code, the source code can be found at [https://github.com/newrelic/nr1-deploymen
 * [graphql](#graphql)
 * [lodash](#lodash)
 * [prop-types](#prop-types)
-* [react-dom](#react-dom)
 * [react-select](#react-select)
 * [react-virtualized-auto-sizer](#react-virtualized-auto-sizer)
 * [react-virtualized](#react-virtualized)
 * [react-window](#react-window)
-* [react](#react)
 * [semantic-ui-react](#semantic-ui-react)
 
 **[devDependencies](#devDependencies)**
@@ -33,18 +31,20 @@ code, the source code can be found at [https://github.com/newrelic/nr1-deploymen
 * [@semantic-release/git](#semantic-releasegit)
 * [eslint](#eslint)
 * [prettier](#prettier)
+* [react-dom](#react-dom)
+* [react](#react)
 
 
 ## dependencies
 
 ### graphql-tag
 
-This product includes source derived from [graphql-tag](https://github.com/apollostack/graphql-tag) ([v2.10.1](https://github.com/apollostack/graphql-tag/tree/v2.10.1)), distributed under the [MIT License](https://github.com/apollostack/graphql-tag/blob/v2.10.1/LICENSE):
+This product includes source derived from [graphql-tag](https://github.com/apollographql/graphql-tag) ([v2.11.0](https://github.com/apollographql/graphql-tag/tree/v2.11.0)), distributed under the [MIT License](https://github.com/apollographql/graphql-tag/blob/v2.11.0/LICENSE):
 
 ```
 The MIT License (MIT)
 
-Copyright (c) 2015 - 2018 Meteor Development Group, Inc.
+Copyright (c) 2020 Meteor Development Group, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ SOFTWARE.
 
 ### graphql
 
-This product includes source derived from [graphql](https://github.com/graphql/graphql-js) ([v14.5.5](https://github.com/graphql/graphql-js/tree/v14.5.5)), distributed under the [MIT License](https://github.com/graphql/graphql-js/blob/v14.5.5/LICENSE):
+This product includes source derived from [graphql](https://github.com/graphql/graphql-js) ([v14.7.0](https://github.com/graphql/graphql-js/tree/v14.7.0)), distributed under the [MIT License](https://github.com/graphql/graphql-js/blob/v14.7.0/LICENSE):
 
 ```
 MIT License
@@ -97,7 +97,7 @@ SOFTWARE.
 
 ### lodash
 
-This product includes source derived from [lodash](https://github.com/lodash/lodash) ([v4.17.15](https://github.com/lodash/lodash/tree/v4.17.15)), distributed under the [MIT License](https://github.com/lodash/lodash/blob/v4.17.15/LICENSE):
+This product includes source derived from [lodash](https://github.com/lodash/lodash) ([v4.17.20](https://github.com/lodash/lodash/tree/v4.17.20)), distributed under the [MIT License](https://github.com/lodash/lodash/blob/v4.17.20/LICENSE):
 
 ```
 Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
@@ -179,38 +179,9 @@ SOFTWARE.
 
 ```
 
-### react-dom
-
-This product includes source derived from [react-dom](https://github.com/facebook/react) ([v16.9.0](https://github.com/facebook/react/tree/v16.9.0)), distributed under the [MIT License](https://github.com/facebook/react/blob/v16.9.0/LICENSE):
-
-```
-MIT License
-
-Copyright (c) Facebook, Inc. and its affiliates.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-
 ### react-select
 
-This product includes source derived from [react-select](https://github.com/JedWatson/react-select) ([v3.0.4](https://github.com/JedWatson/react-select/tree/v3.0.4)), distributed under the [MIT License](https://github.com/JedWatson/react-select/blob/v3.0.4/README.md):
+This product includes source derived from [react-select](https://github.com/JedWatson/react-select) ([v3.1.0](https://github.com/JedWatson/react-select/tree/v3.1.0)), distributed under the [MIT License](https://github.com/JedWatson/react-select/blob/v3.1.0/README.md):
 
 ```
 MIT License Copyright (c) <year> <copyright holders>
@@ -295,38 +266,9 @@ SOFTWARE.
 
 ```
 
-### react
-
-This product includes source derived from [react](https://github.com/facebook/react) ([v16.9.0](https://github.com/facebook/react/tree/v16.9.0)), distributed under the [MIT License](https://github.com/facebook/react/blob/v16.9.0/LICENSE):
-
-```
-MIT License
-
-Copyright (c) Facebook, Inc. and its affiliates.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-
 ### semantic-ui-react
 
-This product includes source derived from [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-React) ([v0.88.1](https://github.com/Semantic-Org/Semantic-UI-React/tree/v0.88.1)), distributed under the [MIT License](https://github.com/Semantic-Org/Semantic-UI-React/blob/v0.88.1/LICENSE.md):
+This product includes source derived from [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-React) ([v0.88.2](https://github.com/Semantic-Org/Semantic-UI-React/tree/v0.88.2)), distributed under the [MIT License](https://github.com/Semantic-Org/Semantic-UI-React/blob/v0.88.2/LICENSE.md):
 
 ```
 MIT License
@@ -358,7 +300,7 @@ SOFTWARE.
 
 ### @newrelic/eslint-plugin-newrelic
 
-This product includes source derived from [@newrelic/eslint-plugin-newrelic](https://github.com/NewRelic/eslint-plugin-newrelic) ([v0.3.0](https://github.com/NewRelic/eslint-plugin-newrelic/tree/v0.3.0)), distributed under the [Apache-2.0 License](https://github.com/NewRelic/eslint-plugin-newrelic/blob/v0.3.0/LICENSE):
+This product includes source derived from [@newrelic/eslint-plugin-newrelic](https://github.com/NewRelic/eslint-plugin-newrelic) ([v0.3.1](https://github.com/NewRelic/eslint-plugin-newrelic/tree/v0.3.1)), distributed under the [Apache-2.0 License](https://github.com/NewRelic/eslint-plugin-newrelic/blob/v0.3.1/LICENSE):
 
 ```
                                  Apache License
@@ -567,7 +509,7 @@ This product includes source derived from [@newrelic/eslint-plugin-newrelic](htt
 
 ### @semantic-release/changelog
 
-This product includes source derived from [@semantic-release/changelog](https://github.com/semantic-release/changelog) ([v3.0.5](https://github.com/semantic-release/changelog/tree/v3.0.5)), distributed under the [MIT License](https://github.com/semantic-release/changelog/blob/v3.0.5/LICENSE):
+This product includes source derived from [@semantic-release/changelog](https://github.com/semantic-release/changelog) ([v5.0.1](https://github.com/semantic-release/changelog/tree/v5.0.1)), distributed under the [MIT License](https://github.com/semantic-release/changelog/blob/v5.0.1/LICENSE):
 
 ```
 MIT License
@@ -596,7 +538,7 @@ SOFTWARE.
 
 ### @semantic-release/git
 
-This product includes source derived from [@semantic-release/git](https://github.com/semantic-release/git) ([v7.0.18](https://github.com/semantic-release/git/tree/v7.0.18)), distributed under the [MIT License](https://github.com/semantic-release/git/blob/v7.0.18/LICENSE):
+This product includes source derived from [@semantic-release/git](https://github.com/semantic-release/git) ([v9.0.0](https://github.com/semantic-release/git/tree/v9.0.0)), distributed under the [MIT License](https://github.com/semantic-release/git/blob/v9.0.0/LICENSE):
 
 ```
 MIT License
@@ -652,7 +594,7 @@ THE SOFTWARE.
 
 ### prettier
 
-This product includes source derived from [prettier](https://github.com/prettier/prettier) ([v2.0.2](https://github.com/prettier/prettier/tree/v2.0.2)), distributed under the [MIT License](https://github.com/prettier/prettier/blob/v2.0.2/LICENSE):
+This product includes source derived from [prettier](https://github.com/prettier/prettier) ([v2.1.1](https://github.com/prettier/prettier/tree/v2.1.1)), distributed under the [MIT License](https://github.com/prettier/prettier/blob/v2.1.1/LICENSE):
 
 ```
 Copyright © James Long and contributors
@@ -662,6 +604,64 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+```
+
+### react-dom
+
+This product includes source derived from [react-dom](https://github.com/facebook/react) ([v16.6.3](https://github.com/facebook/react/tree/v16.6.3)), distributed under the [MIT License](https://github.com/facebook/react/blob/v16.6.3/LICENSE):
+
+```
+MIT License
+
+Copyright (c) Facebook, Inc. and its affiliates.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+
+### react
+
+This product includes source derived from [react](https://github.com/facebook/react) ([v16.6.3](https://github.com/facebook/react/tree/v16.6.3)), distributed under the [MIT License](https://github.com/facebook/react/blob/v16.6.3/LICENSE):
+
+```
+MIT License
+
+Copyright (c) Facebook, Inc. and its affiliates.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ```
 
