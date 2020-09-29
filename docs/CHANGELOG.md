@@ -1,3 +1,10 @@
+## [0.3.6](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.5...v0.3.6) (2020-09-29)
+
+
+### Bug Fixes
+
+* upgrade graphql-tag from 2.10.1 to 2.11.0 ([c412cb8](https://github.com/newrelic/nr1-deployment-analyzer/commit/c412cb82b58c26a08e74d709d0ed9a90e7288521))
+
 ## [0.3.5](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.4...v0.3.5) (2020-09-03)
 
 
