@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "graphql": "^14.5.5",
-    "graphql-tag": "^2.10.1",
+    "graphql-tag": "^2.11.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react-select": "^3.0.4",
