@@ -1,3 +1,24 @@
+## [0.3.7](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.6...v0.3.7) (2021-02-24)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([ab5d22f](https://github.com/newrelic/nr1-deployment-analyzer/commit/ab5d22f053af49209ca4f719a1067f4df3b0880d))
+
+## [0.3.6](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.5...v0.3.6) (2020-09-29)
+
+
+### Bug Fixes
+
+* upgrade graphql-tag from 2.10.1 to 2.11.0 ([c412cb8](https://github.com/newrelic/nr1-deployment-analyzer/commit/c412cb82b58c26a08e74d709d0ed9a90e7288521))
+
+## [0.3.5](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.4...v0.3.5) (2020-09-03)
+
+
+### Bug Fixes
+
+* update default branch to main ([f1dccd2](https://github.com/newrelic/nr1-deployment-analyzer/commit/f1dccd24225192d473156c412b8e4dc3cc587d3a))
+
 ## [0.3.4](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.3...v0.3.4) (2020-08-24)
 
 
