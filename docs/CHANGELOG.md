@@ -1,3 +1,10 @@
+## [0.3.8](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.7...v0.3.8) (2021-02-24)
+
+
+### Bug Fixes
+
+* upgrade graphql from 14.5.5 to 14.7.0 ([2a98268](https://github.com/newrelic/nr1-deployment-analyzer/commit/2a98268f39e8e893ec57264518ccfc27e7dc7e7f))
+
 ## [0.3.7](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.6...v0.3.7) (2021-02-24)
 
 
