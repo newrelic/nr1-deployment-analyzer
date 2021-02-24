@@ -1,3 +1,10 @@
+## [0.3.7](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.6...v0.3.7) (2021-02-24)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([ab5d22f](https://github.com/newrelic/nr1-deployment-analyzer/commit/ab5d22f053af49209ca4f719a1067f4df3b0880d))
+
 ## [0.3.6](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.5...v0.3.6) (2020-09-29)
 
 
