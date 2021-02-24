@@ -1,3 +1,10 @@
+## [0.3.9](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.8...v0.3.9) (2021-02-24)
+
+
+### Bug Fixes
+
+* upgrade lodash from 4.17.15 to 4.17.19 ([d52997d](https://github.com/newrelic/nr1-deployment-analyzer/commit/d52997d93afbd3993d6c531efae11b471636817f))
+
 ## [0.3.8](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.7...v0.3.8) (2021-02-24)
 
 
