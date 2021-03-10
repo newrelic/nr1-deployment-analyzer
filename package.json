@@ -15,7 +15,7 @@
     "lodash": "^4.17.21",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.14.0",
     "react-select": "^3.0.4",
     "react-virtualized": "9.22.2",
     "react-virtualized-auto-sizer": "^1.0.2",
