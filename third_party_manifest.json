@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Tue Mar 09 2021 15:22:39 GMT+0000 (Coordinated Universal Time)",
+  "lastUpdated": "Mon Mar 22 2021 23:25:09 GMT+0000 (Coordinated Universal Time)",
   "projectName": "nr1-deployment-analyzer",
   "projectUrl": "https://github.com/newrelic/nr1-deployment-analyzer",
   "includeDev": true,
@@ -15,15 +15,15 @@
       "licenseUrl": "https://github.com/apollostack/graphql-tag/blob/v2.10.1/LICENSE",
       "licenseTextSource": "file"
     },
-    "graphql@14.5.5": {
+    "graphql@14.7.0": {
       "name": "graphql",
-      "version": "14.5.5",
-      "range": "^14.5.5",
+      "version": "14.7.0",
+      "range": "^14.7.0",
       "licenses": "MIT",
       "repoUrl": "https://github.com/graphql/graphql-js",
-      "versionedRepoUrl": "https://github.com/graphql/graphql-js/tree/v14.5.5",
+      "versionedRepoUrl": "https://github.com/graphql/graphql-js/tree/v14.7.0",
       "licenseFile": "node_modules/graphql/LICENSE",
-      "licenseUrl": "https://github.com/graphql/graphql-js/blob/v14.5.5/LICENSE",
+      "licenseUrl": "https://github.com/graphql/graphql-js/blob/v14.7.0/LICENSE",
       "licenseTextSource": "file"
     },
     "lodash@4.17.21": {
@@ -61,27 +61,27 @@
       "licenseUrl": "https://github.com/facebook/react/blob/v16.9.0/LICENSE",
       "licenseTextSource": "file"
     },
-    "react-select@3.0.4": {
+    "react-select@3.2.0": {
       "name": "react-select",
-      "version": "3.0.4",
-      "range": "^3.0.4",
+      "version": "3.2.0",
+      "range": "^3.2.0",
       "licenses": "MIT",
-      "repoUrl": "https://github.com/JedWatson/react-select",
-      "versionedRepoUrl": "https://github.com/JedWatson/react-select/tree/v3.0.4",
+      "repoUrl": "https://github.com/JedWatson/react-select/tree/master/packages/react-select",
+      "versionedRepoUrl": "https://github.com/JedWatson/react-select/tree/master/packages/react-select/tree/v3.2.0",
       "licenseFile": "node_modules/react-select/README.md",
-      "licenseUrl": "https://github.com/JedWatson/react-select/blob/v3.0.4/README.md",
+      "licenseUrl": "https://github.com/JedWatson/react-select/tree/master/packages/react-select/blob/v3.2.0/README.md",
       "licenseTextSource": "spdx",
       "publisher": "Jed Watson"
     },
-    "react-virtualized-auto-sizer@1.0.2": {
+    "react-virtualized-auto-sizer@1.0.4": {
       "name": "react-virtualized-auto-sizer",
-      "version": "1.0.2",
-      "range": "^1.0.2",
+      "version": "1.0.4",
+      "range": "^1.0.4",
       "licenses": "MIT",
       "repoUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer",
-      "versionedRepoUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer/tree/v1.0.2",
+      "versionedRepoUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer/tree/v1.0.4",
       "licenseFile": "node_modules/react-virtualized-auto-sizer/README.md",
-      "licenseUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer/blob/v1.0.2/README.md",
+      "licenseUrl": "https://github.com/bvaughn/react-virtualized-auto-sizer/blob/v1.0.4/README.md",
       "licenseTextSource": "spdx",
       "publisher": "Brian Vaughn",
       "email": "brian.david.vaughn@gmail.com",

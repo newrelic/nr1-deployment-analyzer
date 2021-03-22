@@ -68,7 +68,7 @@ SOFTWARE.
 
 ### graphql
 
-This product includes source derived from [graphql](https://github.com/graphql/graphql-js) ([v14.5.5](https://github.com/graphql/graphql-js/tree/v14.5.5)), distributed under the [MIT License](https://github.com/graphql/graphql-js/blob/v14.5.5/LICENSE):
+This product includes source derived from [graphql](https://github.com/graphql/graphql-js) ([v14.7.0](https://github.com/graphql/graphql-js/tree/v14.7.0)), distributed under the [MIT License](https://github.com/graphql/graphql-js/blob/v14.7.0/LICENSE):
 
 ```
 MIT License
@@ -210,7 +210,7 @@ SOFTWARE.
 
 ### react-select
 
-This product includes source derived from [react-select](https://github.com/JedWatson/react-select) ([v3.0.4](https://github.com/JedWatson/react-select/tree/v3.0.4)), distributed under the [MIT License](https://github.com/JedWatson/react-select/blob/v3.0.4/README.md):
+This product includes source derived from [react-select](https://github.com/JedWatson/react-select/tree/master/packages/react-select) ([v3.2.0](https://github.com/JedWatson/react-select/tree/master/packages/react-select/tree/v3.2.0)), distributed under the [MIT License](https://github.com/JedWatson/react-select/tree/master/packages/react-select/blob/v3.2.0/README.md):
 
 ```
 MIT License
@@ -226,7 +226,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### react-virtualized-auto-sizer
 
-This product includes source derived from [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer) ([v1.0.2](https://github.com/bvaughn/react-virtualized-auto-sizer/tree/v1.0.2)), distributed under the [MIT License](https://github.com/bvaughn/react-virtualized-auto-sizer/blob/v1.0.2/README.md):
+This product includes source derived from [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer) ([v1.0.4](https://github.com/bvaughn/react-virtualized-auto-sizer/tree/v1.0.4)), distributed under the [MIT License](https://github.com/bvaughn/react-virtualized-auto-sizer/blob/v1.0.4/README.md):
 
 ```
 MIT License
