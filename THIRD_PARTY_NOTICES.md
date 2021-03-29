@@ -242,7 +242,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### react-virtualized
 
-This product includes source derived from [react-virtualized](https://github.com/bvaughn/react-virtualized) ([v9.22.2](https://github.com/bvaughn/react-virtualized/tree/v9.22.2)), distributed under the [MIT License](https://github.com/bvaughn/react-virtualized/blob/v9.22.2/LICENSE):
+This product includes source derived from [react-virtualized](https://github.com/bvaughn/react-virtualized) ([v9.22.3](https://github.com/bvaughn/react-virtualized/tree/v9.22.3)), distributed under the [MIT License](https://github.com/bvaughn/react-virtualized/blob/v9.22.3/LICENSE):
 
 ```
 The MIT License (MIT)
