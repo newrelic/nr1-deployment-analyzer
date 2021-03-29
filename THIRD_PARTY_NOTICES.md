@@ -272,7 +272,7 @@ SOFTWARE.
 
 ### react-window
 
-This product includes source derived from [react-window](https://github.com/bvaughn/react-window) ([v1.8.5](https://github.com/bvaughn/react-window/tree/v1.8.5)), distributed under the [MIT License](https://github.com/bvaughn/react-window/blob/v1.8.5/LICENSE.md):
+This product includes source derived from [react-window](https://github.com/bvaughn/react-window) ([v1.8.6](https://github.com/bvaughn/react-window/tree/v1.8.6)), distributed under the [MIT License](https://github.com/bvaughn/react-window/blob/v1.8.6/LICENSE.md):
 
 ```
 The MIT License (MIT)
