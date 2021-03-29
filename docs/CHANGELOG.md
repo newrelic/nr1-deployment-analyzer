@@ -1,3 +1,15 @@
+## [0.3.5](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.4...v0.3.5) (2021-03-29)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([b5565e0](https://github.com/newrelic/nr1-deployment-analyzer/commit/b5565e0f2b0ac4cd6e582312f37ced269cc89026))
+* upgrade graphql from 14.5.5 to 14.7.0 ([0a6d012](https://github.com/newrelic/nr1-deployment-analyzer/commit/0a6d012bfca011e6f2d31ece95e8f572942787cb))
+* upgrade react-select from 3.0.4 to 3.2.0 ([5264b1e](https://github.com/newrelic/nr1-deployment-analyzer/commit/5264b1e9122db8812cec2362625a161aea266ee8))
+* upgrade react-virtualized from 9.22.2 to 9.22.3 ([457a993](https://github.com/newrelic/nr1-deployment-analyzer/commit/457a99361c5f48294892699ba09158db89f2d3c3))
+* upgrade react-virtualized-auto-sizer from 1.0.2 to 1.0.4 ([c2969d1](https://github.com/newrelic/nr1-deployment-analyzer/commit/c2969d1e3dff32bed4b89da1fe20d2ff72e78d80))
+* upgrade react-window from 1.8.5 to 1.8.6 ([7823e8f](https://github.com/newrelic/nr1-deployment-analyzer/commit/7823e8f757cffa6c5fc3ac005f327a4ea7447547))
+
 ## [0.3.5](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.4...v0.3.5) (2021-03-22)
 
 
