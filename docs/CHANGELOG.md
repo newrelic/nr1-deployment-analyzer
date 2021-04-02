@@ -1,3 +1,10 @@
+## [0.3.10](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.9...v0.3.10) (2021-04-02)
+
+
+### Bug Fixes
+
+* update screenshot aspect ratio to 1.7 ([6b575be](https://github.com/newrelic/nr1-deployment-analyzer/commit/6b575bea50ac5b3ef648262110db34991551a337))
+
 ## [0.3.9](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.8...v0.3.9) (2021-02-24)
 
 
