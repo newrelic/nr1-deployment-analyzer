@@ -1,3 +1,10 @@
+## [0.3.11](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.10...v0.3.11) (2021-04-05)
+
+
+### Bug Fixes
+
+* ensure screenshot is 3:2 ([121b529](https://github.com/newrelic/nr1-deployment-analyzer/commit/121b529169293d76dddfa4bc3b64609f483d079c))
+
 ## [0.3.10](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.9...v0.3.10) (2021-04-02)
 
 
