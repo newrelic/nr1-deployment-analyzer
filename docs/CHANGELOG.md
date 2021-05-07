@@ -1,3 +1,11 @@
+## [0.3.12](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.11...v0.3.12) (2021-05-07)
+
+
+### Bug Fixes
+
+* upgrade react-select from 3.1.0 to 3.2.0 ([7c88f19](https://github.com/newrelic/nr1-deployment-analyzer/commit/7c88f19c7610b13b725de88381b46467163fcec2))
+* upgrade react-window from 1.8.5 to 1.8.6 ([6e14980](https://github.com/newrelic/nr1-deployment-analyzer/commit/6e14980b4b8d9a130a1e296d29ab8c7f0eb54b05))
+
 ## [0.3.11](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.10...v0.3.11) (2021-04-05)
 
 
