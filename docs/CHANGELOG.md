@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.12...v0.4.0) (2021-10-01)
+
+
+### Features
+
+* update semantic release with node ([9e76145](https://github.com/newrelic/nr1-deployment-analyzer/commit/9e761455fa0eb4bb7d3b2382134a5c60c43e5773))
+
 ## [0.3.12](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.3.11...v0.3.12) (2021-05-07)
 
 
