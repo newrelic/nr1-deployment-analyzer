@@ -2,6 +2,8 @@
   "tagline": "Track deployment markers",
   "repository": "https://github.com/newrelic/nr1-deployment-analyzer.git",
   "details": "Deployment Analyzer provides a unified dashboard experience for viewing APM deployment marker data.\n\nFeatures like cross-account support, deployment summary data and connections to related events provide a valuable high-level overview.\n\nAdvanced grouping and filtering features enable you to examine correlations and drill into the data in new and actionable ways.",
+  "categoryTerms": ["language agent"],
+  "keywords": ["apm"],
   "support": {
     "issues": {
       "url": "https://github.com/newrelic/nr1-deployment-analyzer/issues"
