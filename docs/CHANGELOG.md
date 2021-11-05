@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.4.1...v0.5.0) (2021-11-05)
+
+
+### Features
+
+* add catalog keywords and categoryTerms ([dd56e47](https://github.com/newrelic/nr1-deployment-analyzer/commit/dd56e47a227b90cdf3917dcdd3bbe77e829c4546))
+
 ## [0.4.1](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.4.0...v0.4.1) (2021-10-19)
 
 
