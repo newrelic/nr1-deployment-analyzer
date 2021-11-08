@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.5.0...v0.5.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* **README.md:** add link to APM deployment marker docs ([3e00828](https://github.com/newrelic/nr1-deployment-analyzer/commit/3e00828f4a9214e0b7c3a8b63b7f5b25ecab91ae))
+
 # [0.5.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.4.1...v0.5.0) (2021-11-05)
 
 
