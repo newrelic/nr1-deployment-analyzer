@@ -6,7 +6,7 @@
 
 ## Usage
 
-Deployment Analyzer provides a unified dashboard experience for viewing APM deployment marker data.
+Deployment Analyzer provides a unified dashboard experience for viewing [APM deployment marker data](https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/record-monitor-deployments/).
 
 Features like cross-account support, deployment summary data and connections to related events provide a valuable high-level overview.
 
