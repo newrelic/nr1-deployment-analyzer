@@ -177,17 +177,17 @@ export default class DeploymentsContainer extends React.PureComponent {
                       >
                         <div>
                           <BillboardChart
-                            accountId={deployment['account.id']}
+                            accountIds={[deployment['account.id']]}
                             query={`${throughputQuery} ${appClause} ${timeClause}`}
                             style={topChartStyle}
                           />
                           <BillboardChart
-                            accountId={deployment['account.id']}
+                            accountIds={[deployment['account.id']]}
                             query={`${responseQuery} ${appClause} ${timeClause}`}
                             style={topChartStyle}
                           />
                           <BillboardChart
-                            accountId={deployment['account.id']}
+                            accountIds={[deployment['account.id']]}
                             query={`${errorQuery} ${appClause} ${timeClause}`}
                             style={topChartStyle}
                           />
@@ -257,7 +257,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                         }}
                       >
                         <NrqlQuery
-                          accountId={deployment['account.id']}
+                          accountIds={[deployment['account.id']]}
                           query={`${throughputQuery} ${appClause} TIMESERIES ${timeClause}`}
                         >
                           {({ data }) => {
@@ -276,7 +276,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                           }}
                         </NrqlQuery>
                         <NrqlQuery
-                          accountId={deployment['account.id']}
+                          accountIds={[deployment['account.id']]}
                           query={`${responseQuery} ${appClause} TIMESERIES ${timeClause}`}
                         >
                           {({ data }) => {
@@ -295,7 +295,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                           }}
                         </NrqlQuery>
                         <NrqlQuery
-                          accountId={deployment['account.id']}
+                          accountIds={[deployment['account.id']]}
                           query={`${errorQuery} ${appClause} TIMESERIES ${timeClause}`}
                         >
                           {({ data }) => {
