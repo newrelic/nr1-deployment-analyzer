@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.5.1...v0.5.2) (2022-02-22)
+
+
+### Bug Fixes
+
+* Update deprecated field and node v ([7cb3037](https://github.com/newrelic/nr1-deployment-analyzer/commit/7cb3037bf889c2381505f0c75b46b67e36d79b7d))
+
 ## [0.5.1](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.5.0...v0.5.1) (2021-11-08)
 
 
