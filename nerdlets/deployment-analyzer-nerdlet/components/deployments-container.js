@@ -154,7 +154,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                   const throughputQuery = `SELECT count(*) as 'Requests' FROM Transaction, TransactionError`;
                   const responseQuery = `SELECT average(duration) as 'Response' FROM Transaction`;
                   const chartQuery = `SELECT * FROM Transaction, TransactionError ${appClause} SINCE ${sinceTime} UNTIL ${untilTime} LIMIT MAX`;
-                  const errorQuery = `SELECT count(*) as 'Errors' FROM Transaction, TransactionError WHERE error IS TRUE OR (httpResponseCode NOT LIKE '2%%' AND httpResponseCode NOT LIKE '3%%') OR error.message IS NOT NULL`;
+                  const errorQuery = `SELECT count(*) as 'Errors' FROM Transaction, TransactionError WHERE error IS TRUE OR (httpResponseCode NOT LIKE '2%%' AND httpResponseCode NOT LIKE '3%%' AND httpResponseCode IS NOT NULL) OR error.message IS NOT NULL`;
                   const topChartStyle = {
                     width: '125px',
                     height: '50px',
