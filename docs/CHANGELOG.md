@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.5.2...v0.6.0) (2023-07-21)
+
+
+### Features
+
+* update to new deploymentSearch ([7cfc220](https://github.com/newrelic/nr1-deployment-analyzer/commit/7cfc220d8c5765d5e275aaf9fa67ce88ad2f6589))
+
 ## [0.5.2](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.5.1...v0.5.2) (2022-02-22)
 
 
