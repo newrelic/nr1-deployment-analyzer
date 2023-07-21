@@ -106,23 +106,26 @@ export const entityBatchQuery = (guids, startTime, endTime) => {
   return `{
     actor {
       entities(guids: [${guids}]) {
+        deploymentSearch(filter: {timeWindow: {endTime: ${endTime}, startTime: ${startTime}}}) {
+          results {
+            changelog
+            user
+            version
+            timestamp
+            description
+            commit
+            deploymentId
+            deploymentType
+            entityGuid
+            groupId
+          }
+        }
         ... on ApmApplicationEntity {
           name
           language
           guid
           alertSeverity
           applicationId
-          deployments${
-            startTime && endTime
-              ? `(timeWindow: {endTime: ${endTime}, startTime: ${startTime}})`
-              : ''
-          } {
-            user
-            timestamp
-            revision
-            description
-            changelog
-          }
           runningAgentVersions {
             maxVersion
             minVersion

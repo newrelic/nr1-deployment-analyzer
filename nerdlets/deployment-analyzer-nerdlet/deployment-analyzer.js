@@ -206,7 +206,8 @@ export default class DeploymentAnalyzer extends React.PureComponent {
       appsWithApdexBelow1: [],
     };
     entities.forEach((entity) => {
-      entity.deployments.forEach((deployment) => {
+      // console.log(entity?.deploymentSearch || []);
+      (entity?.deploymentSearch?.results || []).forEach((deployment) => {
         // decorate deployments with entity meta
         Object.keys(entity).forEach((entityKey) => {
           const entityKeyValue = entity[entityKey];
