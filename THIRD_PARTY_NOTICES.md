@@ -152,7 +152,7 @@ terms above.
 
 ### prop-types
 
-This product includes source derived from [prop-types](https://github.com/facebook/prop-types) ([v15.7.2](https://github.com/facebook/prop-types/tree/v15.7.2)), distributed under the [MIT License](https://github.com/facebook/prop-types/blob/v15.7.2/LICENSE):
+This product includes source derived from [prop-types](https://github.com/facebook/prop-types) ([v15.8.1](https://github.com/facebook/prop-types/tree/v15.8.1)), distributed under the [MIT License](https://github.com/facebook/prop-types/blob/v15.8.1/LICENSE):
 
 ```
 MIT License
