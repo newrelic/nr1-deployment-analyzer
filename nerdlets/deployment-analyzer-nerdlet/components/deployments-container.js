@@ -20,17 +20,17 @@ import {
 } from 'semantic-ui-react';
 
 function openChartBuilder(query, account) {
-  const nerdlet = {
-    id: 'data-exploration.nrql-editor',
+  navigation.openNerdlet({
+    id: 'unified-data-exploration.share',
     urlState: {
-      initialActiveInterface: 'nrqlEditor',
-      initialChartType: 'table',
-      initialAccountId: account,
-      initialNrqlValue: query,
-      isViewingQuery: true,
+      widget: {
+        visualization: { id: 'viz.table' },
+        rawConfiguration: {
+          nrqlQueries: [{ query, accountIds: [account] }],
+        },
+      },
     },
-  };
-  navigation.openOverlay(nerdlet);
+  });
 }
 
 function createMarker(timestamp) {
