@@ -1,3 +1,15 @@
+# [0.7.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.6.0...v0.7.0) (2026-07-14)
+
+
+### Bug Fixes
+
+* **deps:** bump react to ^16.14.0, align prettier to ^1.19.1 ([8fecf07](https://github.com/newrelic/nr1-deployment-analyzer/commit/8fecf07ec3b6e3b42dfdec18225465e9face0385))
+
+
+### Features
+
+* update cache to v4 ([46730c7](https://github.com/newrelic/nr1-deployment-analyzer/commit/46730c7e4db6c154fffaa00ce434392bbb8f2eac))
+
 # [0.6.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.5.2...v0.6.0) (2023-07-21)
 
 

@@ -85,7 +85,7 @@ export const gqlNrqlQuery = (accountId, query, timeout) => {
     }`;
 };
 
-export const apmEntityGuidsQuery = (cursor) => {
+export const apmEntityGuidsQuery = cursor => {
   return `{
     actor {
       entitySearch(queryBuilder: {domain: APM, reporting: true}) {
@@ -159,33 +159,33 @@ export const entityBatchQuery = (guids, startTime, endTime) => {
   }`;
 };
 
-export const nerdGraphQuery = async (query) => {
+export const nerdGraphQuery = async query => {
   return (
     await NerdGraphQuery.query({
       query: gql`
         ${query}
-      `,
+      `
     })
   ).data;
 };
 
-export const isString = (value) => {
+export const isString = value => {
   return typeof value === 'string' || value instanceof String;
 };
 
-export const isNumber = (value) => {
+export const isNumber = value => {
   return typeof value === 'number' && isFinite(value);
 };
 
-export const isArray = (value) => {
+export const isArray = value => {
   return value && typeof value === 'object' && value.constructor === Array;
 };
 
-export const isObject = (value) => {
+export const isObject = value => {
   return value && typeof value === 'object' && value.constructor === Object;
 };
 
-export const checkType = (value) => {
+export const checkType = value => {
   if (isString(value)) return 'string';
   if (isNumber(value)) return 'number';
   if (isArray(value)) return 'array';
@@ -193,7 +193,7 @@ export const checkType = (value) => {
   return null;
 };
 
-export const sortObject = (obj) => {
+export const sortObject = obj => {
   return Object.keys(obj)
     .sort()
     .reduce((a, v) => {

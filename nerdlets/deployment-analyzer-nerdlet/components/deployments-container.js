@@ -7,7 +7,7 @@ import {
   LineChart,
   NrqlQuery,
   BillboardChart,
-  navigation,
+  navigation
 } from 'nr1';
 import {
   Icon,
@@ -16,7 +16,7 @@ import {
   Divider,
   Popup,
   Button,
-  List,
+  List
 } from 'semantic-ui-react';
 
 function openChartBuilder(query, account) {
@@ -40,15 +40,15 @@ function createMarker(timestamp) {
       color: '#000000',
       viz: 'event',
       axisMarkersType: 'alert',
-      name: 'Deployment',
+      name: 'Deployment'
     },
     data: [
       {
         id: timestamp,
         x0: timestamp,
-        x1: timestamp,
-      },
-    ],
+        x1: timestamp
+      }
+    ]
   };
 }
 
@@ -57,10 +57,7 @@ export default class DeploymentsContainer extends React.PureComponent {
     setParentState: PropTypes.func,
     metrics: PropTypes.object,
     deploymentsToAnalyze: PropTypes.object,
-    groupedDeployments: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.object,
-    ]),
+    groupedDeployments: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
   };
 
   constructor(props) {
@@ -134,7 +131,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                 paddingTop: '15px',
                 paddingRight: '25px',
                 paddingLeft: '5px',
-                backgroundColor: '#FFF',
+                backgroundColor: '#FFF'
               }}
             >
               <ChartGroup>
@@ -159,20 +156,20 @@ export default class DeploymentsContainer extends React.PureComponent {
                     width: '125px',
                     height: '50px',
                     display: 'inline-block',
-                    paddingRight: '15px',
+                    paddingRight: '15px'
                   };
                   const chartStyle = {
                     width: '300px',
                     height: '150px',
                     display: 'inline-block',
-                    paddingRight: '15px',
+                    paddingRight: '15px'
                   };
                   return (
                     <div key={i}>
                       <div
                         style={{
                           display: 'flex',
-                          justifyContent: 'space-between',
+                          justifyContent: 'space-between'
                         }}
                       >
                         <div>
@@ -253,7 +250,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                       <div
                         style={{
                           display: 'flex',
-                          justifyContent: 'space-around',
+                          justifyContent: 'space-around'
                         }}
                       >
                         <NrqlQuery
@@ -262,7 +259,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                         >
                           {({ data }) => {
                             if (data) {
-                              data = data.map((nrqlData) => {
+                              data = data.map(nrqlData => {
                                 nrqlData.metadata.timezone_offsets = null;
                                 return nrqlData;
                               });
@@ -281,7 +278,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                         >
                           {({ data }) => {
                             if (data) {
-                              data = data.map((nrqlData) => {
+                              data = data.map(nrqlData => {
                                 nrqlData.metadata.timezone_offsets = null;
                                 return nrqlData;
                               });
@@ -300,7 +297,7 @@ export default class DeploymentsContainer extends React.PureComponent {
                         >
                           {({ data }) => {
                             if (data) {
-                              data = data.map((nrqlData) => {
+                              data = data.map(nrqlData => {
                                 nrqlData.metadata.timezone_offsets = null;
                                 return nrqlData;
                               });
