@@ -6,7 +6,7 @@ export default class Root extends React.PureComponent {
   render() {
     return (
       <PlatformStateContext.Consumer>
-        {(launcherUrlState) => (
+        {launcherUrlState => (
           <AutoSizer>
             {({ height }) => (
               <DeploymentAnalyzer

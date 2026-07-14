@@ -6,7 +6,7 @@ import {
   checkType,
   sortObject,
   apmEntityGuidsQuery,
-  entityBatchQuery,
+  entityBatchQuery
 } from './lib/utils';
 import MenuBar from './components/menu-bar';
 import DeploymentFeed from './components/deployment-feed';
@@ -23,7 +23,7 @@ const chunk = (arr, size) =>
 export default class DeploymentAnalyzer extends React.PureComponent {
   static propTypes = {
     launcherUrlState: PropTypes.object,
-    height: PropTypes.number,
+    height: PropTypes.number
   };
 
   constructor(props) {
@@ -33,7 +33,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
       groupBy: {
         label: 'Application Name',
         value: 'Application Name',
-        type: 'string',
+        type: 'string'
       },
       groupSelected: '',
       groupSelectedMenu: '',
@@ -45,11 +45,11 @@ export default class DeploymentAnalyzer extends React.PureComponent {
         total: 0,
         appsWithErrors: [],
         appsAlerting: [],
-        appsWithApdexBelow1: [],
+        appsWithApdexBelow1: []
       },
       timeRange: null,
       filters: {},
-      loading: false,
+      loading: false
     };
     this.setParentState = this.setParentState.bind(this);
     this.groupDeployments = this.groupDeployments.bind(this);
@@ -77,7 +77,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
     );
     this.setState({
       loading: true,
-      timeRange: launcherUrlState.timeRange,
+      timeRange: launcherUrlState.timeRange
     });
     this.fetchDeploymentData(true, null, startTime, endTime);
   }
@@ -105,7 +105,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
     });
   }
 
-  updateFilter = (data) => {
+  updateFilter = data => {
     const { filters, deployments, groupBy } = this.state;
     filters[data.label] = data.value;
     this.setState({ filters });
@@ -136,7 +136,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
         entities: [],
         deployments: [],
         deploymentsGrouped: {},
-        deploymentsToAnalyze: {},
+        deploymentsToAnalyze: {}
       });
     }
 
@@ -144,18 +144,18 @@ export default class DeploymentAnalyzer extends React.PureComponent {
     const entitySearchResults =
       (((nerdGraphResult || {}).actor || {}).entitySearch || {}).results || {};
     const foundGuids = ((entitySearchResults || {}).entities || []).map(
-      (result) => result.guid
+      result => result.guid
     );
     if (entitySearchResults) {
       const entityChunks = chunk(foundGuids, 25);
-      const entityPromises = entityChunks.map((chunk) => {
+      const entityPromises = entityChunks.map(chunk => {
         const guids = `"${chunk.join(`","`)}"`;
         return nerdGraphQuery(entityBatchQuery(guids, startTime, endTime));
       });
 
-      await Promise.all(entityPromises).then((values) => {
+      await Promise.all(entityPromises).then(values => {
         let { entities } = this.state;
-        values.forEach(async (value) => {
+        values.forEach(async value => {
           const entitiesResult = ((value || {}).actor || {}).entities || [];
           entities = [...entities, ...entitiesResult];
           this.setState({ entities });
@@ -187,7 +187,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
           loading: false,
           deployments,
           sortByOptions,
-          metrics,
+          metrics
         });
       }
     }
@@ -203,13 +203,13 @@ export default class DeploymentAnalyzer extends React.PureComponent {
       total: 0,
       appsWithErrors: [],
       appsAlerting: [],
-      appsWithApdexBelow1: [],
+      appsWithApdexBelow1: []
     };
-    entities.forEach((entity) => {
+    entities.forEach(entity => {
       // console.log(entity?.deploymentSearch || []);
-      (entity?.deploymentSearch?.results || []).forEach((deployment) => {
+      (entity?.deploymentSearch?.results || []).forEach(deployment => {
         // decorate deployments with entity meta
-        Object.keys(entity).forEach((entityKey) => {
+        Object.keys(entity).forEach(entityKey => {
           const entityKeyValue = entity[entityKey];
           const dataType = checkType(entityKeyValue);
           switch (dataType) {
@@ -220,13 +220,13 @@ export default class DeploymentAnalyzer extends React.PureComponent {
               deployment[entityKey] = entityKeyValue;
               break;
             case 'object':
-              Object.keys(entityKeyValue).forEach((key) => {
+              Object.keys(entityKeyValue).forEach(key => {
                 deployment[`${entityKey}.${key}`] = entityKeyValue[key];
               });
               break;
             case 'array':
               if (entityKey === 'tags') {
-                entityKeyValue.forEach((tag) => {
+                entityKeyValue.forEach(tag => {
                   deployment[`tag.${tag.key}`] =
                     tag.values.length > 0 ? tag.values[0] : '';
                 });
@@ -251,7 +251,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
         deployment.Date = deploymentDate;
 
         // delete typenames and add keys to sort options
-        Object.keys(deployment).forEach((deploymentKey) => {
+        Object.keys(deployment).forEach(deploymentKey => {
           if (deploymentKey.includes('__typename')) {
             delete deployment[deploymentKey];
           } else {
@@ -299,7 +299,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
     let filterApdex = false;
     let filterError = false;
 
-    Object.keys(filters).forEach((filterValue) => {
+    Object.keys(filters).forEach(filterValue => {
       const split = filterValue.split(':');
       switch (filterValue) {
         case 'Error Rate > 0':
@@ -310,7 +310,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
           break;
         case 'Alerting':
           tempDeployments = tempDeployments.filter(
-            (deployment) =>
+            deployment =>
               deployment.alertSeverity &&
               deployment.alertSeverity !== 'UNCONFIGURED' &&
               deployment.alertSeverity !== 'NOT_CONFIGURED' &&
@@ -320,12 +320,12 @@ export default class DeploymentAnalyzer extends React.PureComponent {
         default:
           if (isNaN(split[1])) {
             tempDeployments = tempDeployments.filter(
-              (deployment) =>
+              deployment =>
                 deployment[split[0]] && deployment[split[0]] === split[1]
             );
           } else {
             tempDeployments = tempDeployments.filter(
-              (deployment) =>
+              deployment =>
                 deployment[split[0]] &&
                 deployment[split[0]] >= parseFloat(split[1])
             );
@@ -336,7 +336,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
     // do an OR if filtering apdex and error
     if (filterApdex && filterError) {
       tempDeployments = tempDeployments.filter(
-        (deployment) =>
+        deployment =>
           (deployment['apmSummary.apdexScore'] &&
             deployment['apmSummary.apdexScore'] < 1) ||
           (deployment['apmSummary.errorRate'] &&
@@ -344,13 +344,13 @@ export default class DeploymentAnalyzer extends React.PureComponent {
       );
     } else if (filterApdex && !filterError) {
       tempDeployments = tempDeployments.filter(
-        (deployment) =>
+        deployment =>
           deployment['apmSummary.apdexScore'] &&
           deployment['apmSummary.apdexScore'] < 1
       );
     } else if (filterError && !filterApdex) {
       tempDeployments = tempDeployments.filter(
-        (deployment) =>
+        deployment =>
           deployment['apmSummary.errorRate'] &&
           deployment['apmSummary.errorRate'] > 0
       );
@@ -371,7 +371,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
       deploymentsGrouped,
       deploymentsToAnalyze,
       loading,
-      metrics,
+      metrics
     } = this.state;
     return (
       <>
@@ -406,7 +406,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
               style={{
                 paddingRight: 0,
                 backgroundColor: '#fff',
-                height: this.props.height - 120,
+                height: this.props.height - 120
               }}
             >
               <Menu
@@ -417,7 +417,7 @@ export default class DeploymentAnalyzer extends React.PureComponent {
                   maxHeight: this.props.height - 110,
                   overflowY: 'auto',
                   overflowX: 'hidden',
-                  width: '100%',
+                  width: '100%'
                 }}
               >
                 {Object.keys(deploymentsGrouped).map((group, i) => {

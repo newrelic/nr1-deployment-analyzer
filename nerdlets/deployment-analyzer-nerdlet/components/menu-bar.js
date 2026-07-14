@@ -12,7 +12,7 @@ export default class MenuBar extends React.PureComponent {
     groupBy: PropTypes.object,
     setParentState: PropTypes.func,
     metrics: PropTypes.object,
-    updateFilter: PropTypes.func,
+    updateFilter: PropTypes.func
   };
 
   constructor(props) {
@@ -31,14 +31,14 @@ export default class MenuBar extends React.PureComponent {
     const quickFilterOptions = [
       { key: 1, label: 'Error Rate > 0', value: 'Error Rate > 0' },
       { key: 2, label: 'Apdex Score < 1', value: 'Apdex Score < 1' },
-      { key: 3, label: 'Alerting', value: 'Alerting' }, // !"NOT_CONFIGURED" //!"NOT_ALERTING"
+      { key: 3, label: 'Alerting', value: 'Alerting' } // !"NOT_CONFIGURED" //!"NOT_ALERTING"
     ];
     const groupByOptions = Object.keys(sortByOptions).map((option, i) => {
       return {
         key: i,
         label: option,
         value: option,
-        type: sortByOptions[option],
+        type: sortByOptions[option]
       };
     });
 
@@ -49,7 +49,7 @@ export default class MenuBar extends React.PureComponent {
             <label>Group By</label>
             <Select
               options={groupByOptions}
-              onChange={(groupBy) => {
+              onChange={groupBy => {
                 setParentState({ groupBy }, 'groupDeployments');
               }}
               value={groupBy}
