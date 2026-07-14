@@ -12,7 +12,7 @@ export default class DeploymentFeed extends React.PureComponent {
     filters: PropTypes.object,
     setParentState: PropTypes.func,
     deploymentsToAnalyze: PropTypes.object,
-    deployments: PropTypes.array,
+    deployments: PropTypes.array
   };
 
   componentDidUpdate() {
@@ -27,7 +27,7 @@ export default class DeploymentFeed extends React.PureComponent {
     setParentState({ filters }, 'groupDeployments');
   };
 
-  addDeployment = (deployment) => {
+  addDeployment = deployment => {
     const { deploymentsToAnalyze, setParentState } = this.props;
     const appName = deployment['Application Name'];
     const accName = deployment['Account Name'];
@@ -43,7 +43,7 @@ export default class DeploymentFeed extends React.PureComponent {
     isScrolling, // The List is currently being scrolled
     // eslint-disable-next-line no-unused-vars
     isVisible, // This row is visible within the List (eg it is not an overscanned row)
-    style, // Style object to be applied to row (to position it)
+    style // Style object to be applied to row (to position it)
   }) => {
     const deployment = this.props.deployments[index];
     const deployDate = new Date(deployment.timestamp).toLocaleString();
@@ -55,7 +55,7 @@ export default class DeploymentFeed extends React.PureComponent {
       'Account Name',
       'description',
       'account.id',
-      'guid',
+      'guid'
     ];
     let statusColor = 'green';
     let statusMessage = 'Service is not alerting';
@@ -76,7 +76,7 @@ export default class DeploymentFeed extends React.PureComponent {
             height: cardHeight,
             padding: '10px',
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'space-between'
           }}
         >
           <div style={{}}>
@@ -144,7 +144,7 @@ export default class DeploymentFeed extends React.PureComponent {
                           borderRadius: 0,
                           textAlign: 'left',
                           fontSize: '10px',
-                          padding: '2px',
+                          padding: '2px'
                         }}
                       />
                     );
@@ -169,7 +169,7 @@ export default class DeploymentFeed extends React.PureComponent {
     );
   };
 
-  bindListRef = (ref) => {
+  bindListRef = ref => {
     this.list = ref;
   };
 

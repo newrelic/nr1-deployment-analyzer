@@ -14,14 +14,14 @@ function Filter({ value, removeFilter }) {
 }
 Filter.propTypes = {
   value: PropTypes.string,
-  removeFilter: PropTypes.func,
+  removeFilter: PropTypes.func
 };
 
 export default class FiltersContainer extends React.PureComponent {
   static propTypes = {
     filters: PropTypes.object,
     setParentState: PropTypes.func,
-    count: PropTypes.number,
+    count: PropTypes.number
   };
 
   constructor(props) {
@@ -29,7 +29,7 @@ export default class FiltersContainer extends React.PureComponent {
     this.removeFilter = this.removeFilter.bind(this);
   }
 
-  removeFilter = (label) => {
+  removeFilter = label => {
     const { filters, setParentState } = this.props;
     delete filters[label];
     setParentState({ filters }, 'groupDeployments');
@@ -40,7 +40,7 @@ export default class FiltersContainer extends React.PureComponent {
     return (
       <div className="filters-container" style={{ textAlign: 'left' }}>
         <h3 className="filters-header">Filters ({this.props.count}):</h3>
-        {Object.keys(filters).map((label) => {
+        {Object.keys(filters).map(label => {
           return (
             <Filter
               key={`${label}/${filters[label]}`}
