@@ -26,9 +26,9 @@ function openChartBuilder(query, account) {
       widget: {
         visualization: { id: 'viz.table' },
         rawConfiguration: {
-          nrqlQueries: [{ query, accountIds: [account] }],
-        },
-      },
+          nrqlQueries: [{ query, accountIds: [account] }]
+        }
+      }
     }
   });
 }
