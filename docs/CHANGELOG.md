@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.7.0...v0.7.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* Migrate openOverlay to openNerdlet ([6ae1861](https://github.com/newrelic/nr1-deployment-analyzer/commit/6ae1861fdd08a076b8c3d7f1dc2ca5536c0c216d))
+
 # [0.7.0](https://github.com/newrelic/nr1-deployment-analyzer/compare/v0.6.0...v0.7.0) (2026-07-14)
 
 
